@@ -1,19 +1,45 @@
+{% block base_doctype %}
 <!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        {# Run `composer require symfony/webpack-encore-bundle`
-           and uncomment the following Encore helpers to start using Symfony UX #}
-        {% block stylesheets %}
-            {#{{ encore_entry_link_tags('app') }}#}
+{% endblock %}
+
+{% block base_html %}
+<html lang="{{ app.request.locale }}"
+{% endblock %}
+
+{% block base_head %}
+    {% include 'layout/meta.html.twig' %}
+{% endblock %}
+
+
+{% block base_body %}
+<body>
+    {% block base_body_inner %}
+        {% block base_navigation %}
+            <div class="nav-main">
+                {% block base_navigation_inner %}
+                    {% include 'layout/navigation/navigation.html.twig' %}
+                {% endblock %}
+            </div>
         {% endblock %}
 
-        {% block javascripts %}
-            {#{{ encore_entry_script_tags('app') }}#}
+        {% block base_main %}
+            <main class="content-main">
+                {% block base_flashbags %}{% endblock %}
+
+                {% block base_main_inner %}
+                    {% block base_breadcrumb %}{% endblock %}
+
+                    {% block base_content %}
+                        <div class="container bg-dark text-white rounded">
+                            {% block base_content_inner %}{% endblock %}
+                        </div>
+                    {% endblock %}
+                {% endblock %}
+            </main>
         {% endblock %}
-    </head>
-    <body>
-        {% block body %}{% endblock %}
-    </body>
+    {% endblock %}
+
+    {% block base_footer %}{% endblock %}
+</body>
+{% endblock %}
 </html>
