@@ -17,9 +17,12 @@ $ cd beethoven
 # install beethoven and dependencies according to the composer.lock
 $ composer install
 
-# setup env and database connection
+# setup env and database
 $ echo APP_ENV=prod > .env.local
 $ echo DATABASE_URL="mysql://db_user:db_password@127.0.0.1:3306/db_name?serverVersion=5.7" >> .env.local
+
+$ bin/console doctrine:database:create
+$ bin/console doctrine:migrations:migrate
 
 # compile frontend styles
 $ bin/build-frontend.sh
