@@ -32,7 +32,7 @@ class AuthController extends AbstractController
     }
 
 	/**
-	 * @Route("/register", name="frontend.page.register")
+	 * @Route("/register", name="frontend.auth.register.page")
 	 */
 	public function register(
 		Request $request,
