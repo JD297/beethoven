@@ -14,4 +14,20 @@ class ForumPageLoadedEvent extends PageLoadedEvent
 		$this->page = $page;
 		parent::__construct($request);
 	}
+
+	/**
+	 * @return ForumPage
+	 */
+	public function getPage(): ForumPage
+	{
+		return $this->page;
+	}
+
+	/**
+	 * @param ForumPage $page
+	 */
+	public function setPage(ForumPage $page): void
+	{
+		$this->page = $page;
+	}
 }

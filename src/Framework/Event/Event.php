@@ -12,4 +12,20 @@ class Event extends \Symfony\Contracts\EventDispatcher\Event
 	{
 		$this->request = $request;
 	}
+
+	/**
+	 * @return Request
+	 */
+	public function getRequest(): Request
+	{
+		return $this->request;
+	}
+
+	/**
+	 * @param Request $request
+	 */
+	public function setRequest(Request $request): void
+	{
+		$this->request = $request;
+	}
 }

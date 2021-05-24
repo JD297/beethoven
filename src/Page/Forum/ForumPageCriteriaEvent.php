@@ -15,4 +15,20 @@ class ForumPageCriteriaEvent extends Event
 		$this->criteria = $criteria;
 		parent::__construct($request);
 	}
+
+	/**
+	 * @return Criteria
+	 */
+	public function getCriteria(): Criteria
+	{
+		return $this->criteria;
+	}
+
+	/**
+	 * @param Criteria $criteria
+	 */
+	public function setCriteria(Criteria $criteria): void
+	{
+		$this->criteria = $criteria;
+	}
 }
