@@ -18,7 +18,7 @@
                     <tr>
                         <td class="text-start">
                             <strong class="d-block">
-                                <a class="link-primary text-decoration-none" href="#">{{ topic.name }}</a>
+                                <a class="link-primary text-decoration-none" href="{{ url('frontend.topic.index.page', {'id': topic.id}) }}">{{ topic.name }}</a>
                             </strong>
                             <small class="d-block">{{ topic.description }}</small>
                         </td>
