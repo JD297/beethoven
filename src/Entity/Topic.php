@@ -40,6 +40,11 @@ class Topic
      */
     private $posts;
 
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $active = true;
+
     public function __construct()
     {
         $this->posts = new ArrayCollection();
@@ -112,6 +117,18 @@ class Topic
                 $post->setTopic(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getActive(): ?bool
+    {
+        return $this->active;
+    }
+
+    public function setActive(bool $active): self
+    {
+        $this->active = $active;
 
         return $this;
     }
