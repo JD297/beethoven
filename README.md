@@ -27,3 +27,12 @@ $ bin/console doctrine:migrations:migrate
 # compile frontend styles
 $ bin/build-frontend.sh
 ```
+
+## Load DemoFixtures (optional)
+
+If you want a quick overview over beethoven then start with the demo fixtures:
+
+``` bash
+# load demo fixtures
+$ bin/console doctrine:fixtures:load
+```
