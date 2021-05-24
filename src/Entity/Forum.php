@@ -29,6 +29,11 @@ class Forum
      */
     private $topics;
 
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $active = true;
+
     public function __construct()
     {
         $this->topics = new ArrayCollection();
@@ -77,6 +82,18 @@ class Forum
                 $topic->setForum(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getActive(): bool
+    {
+        return $this->active;
+    }
+
+    public function setActive(bool $active): self
+    {
+        $this->active = $active;
 
         return $this;
     }
