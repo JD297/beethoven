@@ -110,4 +110,9 @@ class User implements UserInterface
     {
         $this->plainPassword = null;
     }
+
+    public function __toString(): string
+    {
+	    return $this->getUsername();
+    }
 }
