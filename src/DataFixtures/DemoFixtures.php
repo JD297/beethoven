@@ -12,7 +12,7 @@ class DemoFixtures extends Fixture
     public function load(ObjectManager $manager)
     {
     	$forum1 = new Forum();
-    	$forum1->setName('Beethoven demo forum');
+		$forum1->setName('Beethoven demo forum I');
 
     	$topic1_1 = new Topic();
     	$topic1_1->setName('Demo topic');
@@ -28,7 +28,7 @@ class DemoFixtures extends Fixture
 	    $manager->persist($forum1);
 
 	    $forum2 = new Forum();
-	    $forum2->setName('Beethoven demo forum');
+	    $forum2->setName('Beethoven demo forum II');
 
 	    $topic2_1 = new Topic();
 	    $topic2_1->setName('Demo topic');
