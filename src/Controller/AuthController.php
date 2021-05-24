@@ -3,8 +3,8 @@
 namespace App\Controller;
 
 use App\Entity\User;
-use App\Form\RegistrationFormType;
-use App\Security\LoginFormAuthenticator;
+use App\Page\Auth\Register\RegisterFormType;
+use App\Page\Auth\Login\LoginFormAuthenticator;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -26,7 +26,7 @@ class AuthController extends AbstractController
 
         $error = $authenticationUtils->getLastAuthenticationError();
 
-        return $this->render('page/security/login.html.twig', [
+        return $this->render('page/auth/login.html.twig', [
 			'error' => $error
 		]);
     }
@@ -47,7 +47,7 @@ class AuthController extends AbstractController
 
 		$user = new User();
 
-		$form = $this->createForm(RegistrationFormType::class);
+		$form = $this->createForm(RegisterFormType::class);
 		$form->handleRequest($request);
 
 		if ($form->isSubmitted() && $form->isValid()) {
@@ -77,7 +77,7 @@ class AuthController extends AbstractController
 			);
 		}
 
-		return $this->render('page/security/register.html.twig', [
+		return $this->render('page/auth/register.html.twig', [
 			'form' => $form->createView(),
 		]);
 	}

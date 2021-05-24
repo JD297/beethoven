@@ -17,7 +17,7 @@ security:
             provider: app_user_provider
             guard:
                 authenticators:
-                    - App\Security\LoginFormAuthenticator
+                    - App\Page\Auth\Login\LoginFormAuthenticator
             logout:
                 path: frontend.auth.logout.page
                 target: frontend.forum.index.page
