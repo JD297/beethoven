@@ -8,9 +8,8 @@ class AbstractPageLoader
 {
 	protected EventDispatcherInterface $eventDispatcher;
 
-	public function __construct(
-		EventDispatcherInterface $eventDispatcher
-	) {
+	public function __construct(EventDispatcherInterface $eventDispatcher)
+	{
 		$this->eventDispatcher = $eventDispatcher;
 	}
 }

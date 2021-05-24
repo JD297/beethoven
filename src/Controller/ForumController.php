@@ -2,7 +2,6 @@
 
 namespace App\Controller;
 
-use App\Page\Forum\ForumPage;
 use App\Page\Forum\ForumPageLoader;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -19,10 +18,11 @@ class ForumController extends AbstractController
 
 	/**
 	 * @Route("/", name="frontend.forum.index.page")
+	 * @param Request $request
+	 * @return Response
 	 */
 	public function index(Request $request): Response
 	{
-		/** @var ForumPage $page */
 		$page = $this->dashboardPageLoader->load($request);
 
 		return $this->render('page/forum/index.html.twig', ['page' => $page]);

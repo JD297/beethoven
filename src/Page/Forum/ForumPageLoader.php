@@ -35,7 +35,7 @@ class ForumPageLoader extends AbstractPageLoader implements PageLoaderInterface
 		$forumCollection = $this->forumRepository->matching($criteria);
 
 		$page = new ForumPage();
-		$page->setForumCollection($forumCollection);
+		$page->setDataCollection($forumCollection);
 
 		$this->eventDispatcher->dispatch(
 			new ForumPageLoadedEvent($page, $request)
