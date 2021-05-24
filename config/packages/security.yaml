@@ -19,7 +19,7 @@ security:
                 authenticators:
                     - App\Security\LoginFormAuthenticator
             logout:
-                path: frontend.page.logout
+                path: frontend.auth.logout.page
                 target: frontend.forum.index.page
 
     # Easy way to control access for large sections of your site

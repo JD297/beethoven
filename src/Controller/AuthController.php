@@ -83,7 +83,7 @@ class AuthController extends AbstractController
 	}
 
 	/**
-	 * @Route("/logout", name="frontend.page.logout")
+	 * @Route("/logout", name="frontend.auth.logout.page")
 	 */
 	public function logout()
 	{
