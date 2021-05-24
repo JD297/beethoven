@@ -1,12 +1,12 @@
 <?php declare(strict_types=1);
 
-namespace App\Page\Dashboard;
+namespace App\Page\Forum;
 
 use App\Framework\Event\Event;
 use Doctrine\Common\Collections\Criteria;
 use Symfony\Component\HttpFoundation\Request;
 
-class DashboardPageCriteriaEvent extends Event
+class ForumPageCriteriaEvent extends Event
 {
 	protected Criteria $criteria;
 

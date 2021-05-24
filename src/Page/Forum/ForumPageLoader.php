@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace App\Page\Dashboard;
+namespace App\Page\Forum;
 
 use App\Page\AbstractPageLoader;
 use App\Page\PageInterface;
@@ -11,7 +11,7 @@ use Doctrine\Common\Collections\Expr\Comparison;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\HttpFoundation\Request;
 
-class DashboardPageLoader extends AbstractPageLoader implements PageLoaderInterface
+class ForumPageLoader extends AbstractPageLoader implements PageLoaderInterface
 {
 	protected ForumRepository $forumRepository;
 
@@ -29,16 +29,16 @@ class DashboardPageLoader extends AbstractPageLoader implements PageLoaderInterf
 		$criteria->where(new Comparison('active', Comparison::EQ, true));
 
 		$this->eventDispatcher->dispatch(
-			new DashboardPageCriteriaEvent($criteria, $request)
+			new ForumPageCriteriaEvent($criteria, $request)
 		);
 
 		$forumCollection = $this->forumRepository->matching($criteria);
 
-		$page = new DashboardPage();
+		$page = new ForumPage();
 		$page->setForumCollection($forumCollection);
 
 		$this->eventDispatcher->dispatch(
-			new DashboardPageLoadedEvent($page, $request)
+			new ForumPageLoadedEvent($page, $request)
 		);
 
 		return $page;

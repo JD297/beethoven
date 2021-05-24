@@ -1,11 +1,11 @@
 <?php declare(strict_types=1);
 
-namespace App\Page\Dashboard;
+namespace App\Page\Forum;
 
 use App\Page\Page;
 use Doctrine\ORM\LazyCriteriaCollection;
 
-class DashboardPage extends Page
+class ForumPage extends Page
 {
 	protected LazyCriteriaCollection $forumCollection;
 

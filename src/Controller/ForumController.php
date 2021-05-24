@@ -2,29 +2,29 @@
 
 namespace App\Controller;
 
-use App\Page\Dashboard\DashboardPage;
-use App\Page\Dashboard\DashboardPageLoader;
+use App\Page\Forum\ForumPage;
+use App\Page\Forum\ForumPageLoader;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-class DashboardController extends AbstractController
+class ForumController extends AbstractController
 {
-	private DashboardPageLoader $dashboardPageLoader;
+	private ForumPageLoader $dashboardPageLoader;
 
-	public function __construct(DashboardPageLoader $dashboardPageLoader) {
+	public function __construct(ForumPageLoader $dashboardPageLoader) {
 		$this->dashboardPageLoader = $dashboardPageLoader;
 	}
 
 	/**
-	 * @Route("/", name="frontend.page.dashboard")
+	 * @Route("/", name="frontend.forum.index.page")
 	 */
 	public function index(Request $request): Response
 	{
-		/** @var DashboardPage $page */
+		/** @var ForumPage $page */
 		$page = $this->dashboardPageLoader->load($request);
 
-		return $this->render('page/dashboard.html.twig', ['page' => $page]);
+		return $this->render('page/forum/index.html.twig', ['page' => $page]);
 	}
 }

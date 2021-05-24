@@ -21,7 +21,7 @@ class AuthController extends AbstractController
     public function login(AuthenticationUtils $authenticationUtils): Response
     {
 		if ($this->getUser()) {
-			return $this->redirectToRoute('frontend.page.dashboard');
+			return $this->redirectToRoute('frontend.forum.index.page');
 		}
 
         $error = $authenticationUtils->getLastAuthenticationError();
@@ -42,7 +42,7 @@ class AuthController extends AbstractController
 	): Response
 	{
 		if ($this->getUser()) {
-			return $this->redirectToRoute('frontend.page.dashboard');
+			return $this->redirectToRoute('frontend.forum.index.page');
 		}
 
 		$user = new User();
