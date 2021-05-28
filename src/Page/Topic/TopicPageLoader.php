@@ -2,54 +2,51 @@
 
 namespace App\Page\Topic;
 
-use App\Page\AbstractPageLoader;
-use App\Page\PageInterface;
-use App\Page\PageLoaderInterface;
+use App\Entity\Topic;
 use App\Repository\TopicRepository;
 use Doctrine\Common\Collections\Criteria;
 use Doctrine\Common\Collections\Expr\Comparison;
+use Doctrine\Common\Collections\Expr\CompositeExpression;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
-class TopicPageLoader extends AbstractPageLoader implements PageLoaderInterface
+class TopicPageLoader
 {
 	protected TopicRepository $topicRepository;
+	protected EventDispatcherInterface $eventDispatcher;
 
 	public function __construct(
 		TopicRepository $topicRepository,
 		EventDispatcherInterface $eventDispatcher
 	) {
 		$this->topicRepository = $topicRepository;
-		parent::__construct($eventDispatcher);
+		$this->eventDispatcher = $eventDispatcher;
 	}
 
-	public function load(Request $request): PageInterface
+	public function load(int $topicId): TopicPage
 	{
-		$topicId = $request->get('id');
-
 		$criteria = new Criteria();
-		$criteria
-			->where(new Comparison('active', Comparison::EQ, true))
-			->andWhere(new Comparison('id', Comparison::EQ, $topicId))
-		;
+		$criteria->where(new CompositeExpression(CompositeExpression::TYPE_AND, [
+			new Comparison('id', Comparison::EQ, $topicId),
+			new Comparison('active', Comparison::EQ, true),
+		]));
 
 		$this->eventDispatcher->dispatch(
-			new TopicPageCriteriaEvent($criteria, $request)
+			new TopicCriteriaLoadedEvent($criteria)
 		);
 
-		$topicCollection = $this->topicRepository->matching($criteria);
+		/** @var Topic|bool $topic */
+		$topic = $this->topicRepository->matching($criteria)->first();
 
-		$page = new TopicPage();
-		$page->setDataCollection($topicCollection);
-
-		$this->eventDispatcher->dispatch(
-			new TopicPageLoadedEvent($page, $request)
-		);
-
-		if($topicCollection->count() === 0) {
-			throw new NotFoundHttpException('Topic was not found!');
+		if(!$topic instanceof Topic) {
+			throw new NotFoundHttpException();
 		}
+
+		$page = new TopicPage($topic);
+
+		$this->eventDispatcher->dispatch(
+			new TopicPageLoadedEvent($page)
+		);
 
 		return $page;
 	}

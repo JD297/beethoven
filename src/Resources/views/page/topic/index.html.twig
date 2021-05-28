@@ -1,9 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% block base_content_inner %}
-    {% set topic = page.dataCollection.first %}
+    {% set topic = page.topic %}
 
-    <div class="p-5">
-        <h1 class="border-bottom border-secondary pb-2">{{ topic.name }}</h1>
-    </div>
+    <h1 class="border-bottom border-secondary pb-2">{{ topic.name }}</h1>
 {% endblock %}

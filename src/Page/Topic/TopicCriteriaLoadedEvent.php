@@ -4,6 +4,6 @@ namespace App\Page\Topic;
 
 use App\Page\CriteriaLoadedEvent;
 
-class TopicPageCriteriaEvent extends CriteriaLoadedEvent
+class TopicCriteriaLoadedEvent extends CriteriaLoadedEvent
 {
 }
