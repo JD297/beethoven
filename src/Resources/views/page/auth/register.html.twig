@@ -1,31 +1,29 @@
 {% extends 'base.html.twig' %}
 
 {% block base_content_inner %}
-    <div class="p-5">
-        <h1 class="border-bottom border-secondary pb-2">Sign Up</h1>
+    <h1 class="border-bottom border-secondary pb-2">Sign Up</h1>
 
-        {{ form_start(form) }}
-            <div class="my-3">
-                {{ form_label(form.username, 'Your Username') }}
-                {{ form_widget(form.username, {'attr': {
-                    'class': 'form-control mt-1 mb-2',
-                    'placeholder': 'Username'
-                }}) }}
-                {{ form_errors(form.username) }}
-            </div>
+    {{ form_start(form) }}
+        <div class="my-3">
+            {{ form_label(form.username, 'Your Username') }}
+            {{ form_widget(form.username, {'attr': {
+                'class': 'form-control mt-1 mb-2',
+                'placeholder': 'Username'
+            }}) }}
+            {{ form_errors(form.username) }}
+        </div>
 
-            <div class="my-3">
-                {{ form_label(form.plainPassword, 'Your Password') }}
-                {{ form_widget(form.plainPassword, {'attr': {
-                    'class': 'form-control mt-1 mb-2',
-                    'placeholder': 'Password'
-                }}) }}
-                {{ form_errors(form.plainPassword) }}
-            </div>
+        <div class="my-3">
+            {{ form_label(form.plainPassword, 'Your Password') }}
+            {{ form_widget(form.plainPassword, {'attr': {
+                'class': 'form-control mt-1 mb-2',
+                'placeholder': 'Password'
+            }}) }}
+            {{ form_errors(form.plainPassword) }}
+        </div>
 
-            <div class="my-3">
-                {{ form_widget(form.submit, {'attr': {'class': 'btn btn-primary'}}) }}
-            </div>
-        {{ form_end(form) }}
-    </div>
+        <div class="my-3">
+            {{ form_widget(form.submit, {'attr': {'class': 'btn btn-primary'}}) }}
+        </div>
+    {{ form_end(form) }}
 {% endblock %}

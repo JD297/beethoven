@@ -31,7 +31,9 @@
 
                     {% block base_content %}
                         <div class="container bg-dark text-white rounded">
-                            {% block base_content_inner %}{% endblock %}
+                            <div class="p-5">
+                                {% block base_content_inner %}{% endblock %}
+                            </div>
                         </div>
                     {% endblock %}
                 {% endblock %}
