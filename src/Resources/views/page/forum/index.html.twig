@@ -1,38 +1,34 @@
 {% extends 'base.html.twig' %}
 
 {% block base_content_inner %}
-    <div class="p-5">
-        <h1 class="border-bottom border-secondary pb-2">Forum</h1>
+    {% set forum = page.forum %}
 
-        {% for forum in page.data %}
-            <table class="table table-hover table-striped table-dark text-center mt-4">
-                <thead class="text-uppercase">
-                <tr>
-                    <th class="border-secondary w-50 text-start">{{ forum.name }}</th>
-                    <th class="border-secondary w-25">statistics</th>
-                    <th class="border-secondary w-25">last contribution</th>
-                </tr>
-                </thead>
-                <tbody>
-                {% for topic in forum.topics %}
-                    <tr>
-                        <td class="text-start">
-                            <strong class="d-block">
-                                <a class="link-primary text-decoration-none" href="{{ url('frontend.topic.index.page', {'id': topic.id}) }}">{{ topic.name }}</a>
-                            </strong>
-                            <small class="d-block">{{ topic.description }}</small>
-                        </td>
-                        <td>
-                            <div>Posts: 0</div>
-                            <div>Contributions: 0</div>
-                        </td>
-                        <td>
-                            <a class="link-primary text-decoration-none" href="#">{{ "now"|date("d M Y H:i") }} by username</a>
-                        </td>
-                    </tr>
-                {% endfor %}
-                </tbody>
-            </table>
+    <table class="table table-hover table-striped table-dark text-center mt-4">
+        <thead class="text-uppercase">
+        <tr>
+            <th class="border-secondary w-50 text-start">{{ forum.name }}</th>
+            <th class="border-secondary w-25">statistics</th>
+            <th class="border-secondary w-25">last contribution</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for topic in forum.topics %}
+            <tr>
+                <td class="text-start">
+                    <strong class="d-block">
+                        <a class="link-primary text-decoration-none" href="{{ url('frontend.topic.index.page', {'topicId': topic.id}) }}">{{ topic.name }}</a>
+                    </strong>
+                    <small class="d-block">{{ topic.description }}</small>
+                </td>
+                <td>
+                    <div>Posts: 0</div>
+                    <div>Contributions: 0</div>
+                </td>
+                <td>
+                    <a class="link-primary text-decoration-none" href="#">{{ "now"|date("d M Y H:i") }} by username</a>
+                </td>
+            </tr>
         {% endfor %}
-    </div>
+        </tbody>
+    </table>
 {% endblock %}

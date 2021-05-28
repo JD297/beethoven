@@ -2,43 +2,50 @@
 
 namespace App\Page\Forum;
 
-use App\Page\AbstractPageLoader;
-use App\Page\PageInterface;
-use App\Page\PageLoaderInterface;
+use App\Entity\Forum;
 use App\Repository\ForumRepository;
 use Doctrine\Common\Collections\Criteria;
 use Doctrine\Common\Collections\Expr\Comparison;
+use Doctrine\Common\Collections\Expr\CompositeExpression;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
-use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
-class ForumPageLoader extends AbstractPageLoader implements PageLoaderInterface
+class ForumPageLoader
 {
 	protected ForumRepository $forumRepository;
+	protected EventDispatcherInterface $eventDispatcher;
 
 	public function __construct(
 		ForumRepository $forumRepository,
 		EventDispatcherInterface $eventDispatcher
 	) {
 		$this->forumRepository = $forumRepository;
-		parent::__construct($eventDispatcher);
+		$this->eventDispatcher = $eventDispatcher;
 	}
 
-	public function load(Request $request): PageInterface
+	public function load(int $forumId): ForumPage
 	{
 		$criteria = new Criteria();
-		$criteria->where(new Comparison('active', Comparison::EQ, true));
+		$criteria->where(new CompositeExpression(CompositeExpression::TYPE_AND, [
+			new Comparison('id', Comparison::EQ, $forumId),
+			new Comparison('active', Comparison::EQ, true),
+		]));
 
 		$this->eventDispatcher->dispatch(
-			new ForumPageCriteriaEvent($criteria, $request)
+			new ForumCriteriaLoadedEvent($criteria)
 		);
 
-		$forumCollection = $this->forumRepository->matching($criteria);
+		/** @var Forum|bool $forum */
+		$forum = $this->forumRepository->matching($criteria)->first();
 
-		$page = new ForumPage();
-		$page->setDataCollection($forumCollection);
+		if(!$forum instanceof Forum) {
+			throw new NotFoundHttpException();
+		}
+
+		$page = new ForumPage($forum);
 
 		$this->eventDispatcher->dispatch(
-			new ForumPageLoadedEvent($page, $request)
+			new ForumPageLoadedEvent($page)
 		);
 
 		return $page;

@@ -4,27 +4,28 @@ namespace App\Controller;
 
 use App\Page\Forum\ForumPageLoader;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 class ForumController extends AbstractController
 {
-	private ForumPageLoader $dashboardPageLoader;
+	private ForumPageLoader $forumPageLoader;
 
-	public function __construct(ForumPageLoader $dashboardPageLoader) {
-		$this->dashboardPageLoader = $dashboardPageLoader;
+	public function __construct(ForumPageLoader $forumPageLoader) {
+		$this->forumPageLoader = $forumPageLoader;
 	}
 
 	/**
-	 * @Route("/", name="frontend.forum.index.page")
-	 * @param Request $request
+	 * @Route("/forum/{forumId}", name="frontend.forum.index.page", requirements={"forumId"="\d+"}, methods={"GET"})
+	 * @param int forumId
 	 * @return Response
 	 */
-	public function index(Request $request): Response
+	public function index(int $forumId): Response
 	{
-		$page = $this->dashboardPageLoader->load($request);
+		$page = $this->forumPageLoader->load($forumId);
 
-		return $this->render('page/forum/index.html.twig', ['page' => $page]);
+		return $this->render('page/forum/index.html.twig', [
+			'page' => $page->getData()
+		]);
 	}
 }
