@@ -3,31 +3,31 @@
 namespace App\Page;
 
 use App\Framework\Event\Event;
-use Symfony\Component\HttpFoundation\Request;
 
 abstract class PageLoadedEvent extends Event
 {
-	protected PageInterface $page;
+	protected Page $page;
 
-	public function __construct(PageInterface $page, Request $request)
+	public function __construct(Page $page)
 	{
 		$this->page = $page;
-		parent::__construct($request);
 	}
 
 	/**
-	 * @return PageInterface
+	 * @return Page
 	 */
-	public function getPage(): PageInterface
+	public function getPage(): Page
 	{
 		return $this->page;
 	}
 
 	/**
-	 * @param PageInterface $page
+	 * @param Page $page
+	 * @return PageLoadedEvent
 	 */
-	public function setPage(PageInterface $page): void
+	public function setPage(Page $page): self
 	{
 		$this->page = $page;
+		return $this;
 	}
 }

@@ -2,35 +2,26 @@
 
 namespace App\Page;
 
-use App\Framework\Struct\Struct;
-use Doctrine\ORM\LazyCriteriaCollection;
+use App\Framework\Struct\ArrayStruct;
 
-class Page extends Struct implements PageInterface
+abstract class Page
 {
-	protected LazyCriteriaCollection $dataCollection;
+	protected ArrayStruct $data;
 
-	/**
-	 * @return LazyCriteriaCollection
-	 */
-	public function getDataCollection(): LazyCriteriaCollection
+	public function __construct()
 	{
-		return $this->dataCollection;
+		$this->data = new ArrayStruct([
+			'custom' => new ArrayStruct()
+		]);
 	}
 
-	/**
-	 * @param LazyCriteriaCollection $dataCollection
-	 */
-	public function setDataCollection(LazyCriteriaCollection $dataCollection): self
+	public function getCustomData(): ArrayStruct
 	{
-		$this->dataCollection = $dataCollection;
-		return $this;
+		return $this->data->get('custom');
 	}
 
-	/**
-	 * @return array
-	 */
 	public function getData(): array
 	{
-		return $this->dataCollection->toArray();
+		return $this->data->getData();
 	}
 }

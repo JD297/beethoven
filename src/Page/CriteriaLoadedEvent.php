@@ -4,16 +4,14 @@ namespace App\Page;
 
 use App\Framework\Event\Event;
 use Doctrine\Common\Collections\Criteria;
-use Symfony\Component\HttpFoundation\Request;
 
 abstract class CriteriaLoadedEvent extends Event
 {
 	protected Criteria $criteria;
 
-	public function __construct(Criteria $criteria, Request $request)
+	public function __construct(Criteria $criteria)
 	{
 		$this->criteria = $criteria;
-		parent::__construct($request);
 	}
 
 	/**
@@ -26,6 +24,7 @@ abstract class CriteriaLoadedEvent extends Event
 
 	/**
 	 * @param Criteria $criteria
+	 * @return CriteriaLoadedEvent
 	 */
 	public function setCriteria(Criteria $criteria): self
 	{
