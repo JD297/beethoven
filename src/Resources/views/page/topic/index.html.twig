@@ -22,8 +22,8 @@
                     </strong>
                 </td>
                 <td>
-                    <div>Answers: 0</div>
-                    <div>Views: 0</div>
+                    <div>Answers: {{ post.comments.count }}</div>
+                    <div>Views: {{ post.views }}</div>
                 </td>
                 <td>
                     <a class="link-primary text-decoration-none" href="#">{{ "now"|date("d M Y H:i") }} by username</a>
