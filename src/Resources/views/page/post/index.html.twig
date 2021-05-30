@@ -1,0 +1,9 @@
+{% extends 'base.html.twig' %}
+
+{% block base_content_inner %}
+    {% set post = page.post %}
+
+    <h1>{{ post.name }}</h1>
+
+    <pre>{{ post.content }}</pre>
+{% endblock %}
