@@ -2,6 +2,7 @@
 
 namespace App\DataFixtures;
 
+use App\Entity\Comment;
 use App\Entity\Forum;
 use App\Entity\Post;
 use App\Entity\Topic;
@@ -51,6 +52,22 @@ class DemoFixtures extends Fixture
 		    ->setUser($user)
 	    ;
 		$manager->persist($post1_1_1);
+
+		$comment1_1_1_1 = new Comment();
+		$comment1_1_1_1
+			->setContent('Good first post.')
+			->setUser($user)
+			->setPost($post1_1_1)
+		;
+		$manager->persist($comment1_1_1_1);
+
+	    $comment1_1_1_2 = new Comment();
+	    $comment1_1_1_2
+		    ->setContent('Second comment in first post.')
+		    ->setUser($user)
+		    ->setPost($post1_1_1)
+	    ;
+	    $manager->persist($comment1_1_1_2);
 
 	    $post1_1_2 = new Post();
 	    $post1_1_2
