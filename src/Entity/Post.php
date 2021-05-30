@@ -47,7 +47,7 @@ class Post
     private $topic;
 
     /**
-     * @ORM\OneToMany(targetEntity=Comment::class, mappedBy="posts")
+     * @ORM\OneToMany(targetEntity=Comment::class, mappedBy="post")
      */
     private $comments;
 

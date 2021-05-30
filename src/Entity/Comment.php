@@ -29,12 +29,6 @@ class Comment
     private $user;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Post::class, inversedBy="comments")
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $posts;
-
-    /**
      * @ORM\Column(type="datetime")
      */
     private $createdAt;
@@ -44,7 +38,18 @@ class Comment
      */
     private $updatedAt;
 
-    public function getId(): ?int
+    /**
+     * @ORM\ManyToOne(targetEntity=Post::class)
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $post;
+
+    public function __construct()
+    {
+	    $this->createdAt = new \DateTime();
+    }
+
+	public function getId(): ?int
     {
         return $this->id;
     }
@@ -73,18 +78,6 @@ class Comment
         return $this;
     }
 
-    public function getPosts(): ?Post
-    {
-        return $this->posts;
-    }
-
-    public function setPosts(?Post $posts): self
-    {
-        $this->posts = $posts;
-
-        return $this;
-    }
-
     public function getCreatedAt(): ?\DateTimeInterface
     {
         return $this->createdAt;
@@ -105,6 +98,18 @@ class Comment
     public function setUpdatedAt(?\DateTimeInterface $updatedAt): self
     {
         $this->updatedAt = $updatedAt;
+
+        return $this;
+    }
+
+    public function getPost(): ?Post
+    {
+        return $this->post;
+    }
+
+    public function setPost(?Post $post): self
+    {
+        $this->post = $post;
 
         return $this;
     }
