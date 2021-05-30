@@ -32,7 +32,7 @@ class Post
     /**
      * @ORM\Column(type="integer")
      */
-    private $views;
+    private $views = 0;
 
     /**
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="posts")
@@ -64,6 +64,7 @@ class Post
     public function __construct()
     {
         $this->comments = new ArrayCollection();
+        $this->createdAt = new \DateTime();
     }
 
     public function getId(): ?int
@@ -100,9 +101,9 @@ class Post
         return $this->views;
     }
 
-    public function setViews(int $views): self
+    public function addView(): self
     {
-        $this->views = $views;
+        $this->views += 1;
 
         return $this;
     }
