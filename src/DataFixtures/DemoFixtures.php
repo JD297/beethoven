@@ -13,6 +13,11 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class DemoFixtures extends Fixture
 {
+	const DEMO_CONTENT = "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
+
+Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
+Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.";
+
 	/**
 	 * @var UserPasswordEncoderInterface $passwordEncoder
 	 */
@@ -47,7 +52,7 @@ class DemoFixtures extends Fixture
 		$post1_1_1 = new Post();
 		$post1_1_1
 		    ->setName('Demo Post in demo topic 1')
-		    ->setContent('Content in Demo Post 1')
+		    ->setContent(self::DEMO_CONTENT)
 		    ->setTopic($topic1_1)
 		    ->setUser($user)
 	    ;
@@ -55,7 +60,7 @@ class DemoFixtures extends Fixture
 
 		$comment1_1_1_1 = new Comment();
 		$comment1_1_1_1
-			->setContent('Good first post.')
+			->setContent(self::DEMO_CONTENT)
 			->setUser($user)
 			->setPost($post1_1_1)
 		;
@@ -63,7 +68,7 @@ class DemoFixtures extends Fixture
 
 	    $comment1_1_1_2 = new Comment();
 	    $comment1_1_1_2
-		    ->setContent('Second comment in first post.')
+		    ->setContent(self::DEMO_CONTENT)
 		    ->setUser($user)
 		    ->setPost($post1_1_1)
 	    ;
@@ -72,7 +77,7 @@ class DemoFixtures extends Fixture
 	    $post1_1_2 = new Post();
 	    $post1_1_2
 		    ->setName('Demo Post in demo topic 2')
-		    ->setContent('Content in Demo Post 2')
+		    ->setContent(self::DEMO_CONTENT)
 		    ->setTopic($topic1_1)
 		    ->setUser($user)
 	    ;
