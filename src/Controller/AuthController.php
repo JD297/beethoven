@@ -21,7 +21,7 @@ class AuthController extends AbstractController
     public function login(AuthenticationUtils $authenticationUtils): Response
     {
 		if ($this->getUser()) {
-			return $this->redirectToRoute('frontend.forum.index.page');
+			return $this->redirectToRoute('frontend.home.index.page');
 		}
 
         $error = $authenticationUtils->getLastAuthenticationError();
@@ -42,7 +42,7 @@ class AuthController extends AbstractController
 	): Response
 	{
 		if ($this->getUser()) {
-			return $this->redirectToRoute('frontend.forum.index.page');
+			return $this->redirectToRoute('frontend.home.index.page');
 		}
 
 		$user = new User();
@@ -65,8 +65,6 @@ class AuthController extends AbstractController
 			$entityManager = $this->getDoctrine()->getManager();
 			$entityManager->persist($user);
 			$entityManager->flush();
-
-			// do anything else you need here, like send an email
 
 			// login after registration
 			return $guardHandler->authenticateUserAndHandleSuccess(
