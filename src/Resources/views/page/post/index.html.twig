@@ -3,7 +3,43 @@
 {% block base_content_inner %}
     {% set post = page.post %}
 
-    <h1>{{ post.name }}</h1>
+    <h1 class="border-bottom border-secondary pb-2">{{ post.name }}</h1>
 
-    <pre>{{ post.content }}</pre>
+    <p style="white-space: pre-wrap;">{{ post.content }}</p>
+
+    <div class="blockquote-footer text-primary border-bottom border-secondary pb-2 mb-2">
+        by <strong>{{ post.user.username }}</strong> at {{ post.createdAt|date }}
+    </div>
+
+    {% for comment in post.comments %}
+        <p style="white-space: pre-wrap;">{{ comment.content }}</p>
+
+        <div class="blockquote-footer text-primary border-bottom border-secondary pb-2 mb-2">
+            by <strong>{{ comment.user.username }}</strong> at {{ comment.createdAt|date }}
+        </div>
+    {% endfor %}
+
+    {% block frontend_post_index_page_comment_form %}
+        {% for message in app.flashes('error') %}
+            <div class="alert alert-danger">
+                {{ message }}
+            </div>
+        {% endfor %}
+
+        {% if app.user %}
+            {{ form_start(commentForm) }}
+                <div class="form-group">
+                    {{ form_widget(commentForm.content, {'attr': {
+                        'class': 'form-control text-white bg-dark',
+                        'placeholder': 'Write something...'
+                    }}) }}
+                    {{ form_errors(commentForm.content) }}
+                </div>
+
+                {{ form_widget(commentForm.submit, {'attr': {
+                    'class': 'btn btn-primary my-3'
+                }}) }}
+            {{ form_end(commentForm) }}
+        {% endif %}
+    {% endblock %}
 {% endblock %}
