@@ -1,0 +1,6 @@
+frontend:
+    navigation:
+        greet: 'Hello, %username%'
+        logout: 'Log Out'
+        login: 'Log In'
+        register: 'Sign Up'

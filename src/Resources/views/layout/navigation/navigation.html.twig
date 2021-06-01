@@ -7,19 +7,19 @@
                 <ul class="navbar-nav align-content-end">
                     {% if app.user %}
                         <li class="nav-item mx-2">
-                            <div class="text-white px-3 py-1">Hello, {{ app.user.username }}</div>
+                            <div class="text-white px-3 py-1">{{ 'frontend.navigation.greet'|trans({'%username%': app.user.username}) }}</div>
                         </li>
 
                         <li class="nav-item mx-2">
-                            <a class="btn btn-primary px-3 py-1" href="{{ url('frontend.auth.logout.page') }}">Log Out</a>
+                            <a class="btn btn-primary px-3 py-1" href="{{ url('frontend.auth.logout.page') }}">{{ 'frontend.navigation.logout'|trans }}</a>
                         </li>
                     {% else %}
                         <li class="nav-item mx-2">
-                            <a class="btn btn-secondary px-3 py-1" href="{{ url('frontend.auth.login.page') }}">Log In</a>
+                            <a class="btn btn-secondary px-3 py-1" href="{{ url('frontend.auth.login.page') }}">{{ 'frontend.navigation.login'|trans }}</a>
                         </li>
 
                         <li class="nav-item mx-2">
-                            <a class="btn btn-primary px-3 py-1" href="{{ url('frontend.auth.register.page') }}">Sign Up</a>
+                            <a class="btn btn-primary px-3 py-1" href="{{ url('frontend.auth.register.page') }}">{{ 'frontend.navigation.register'|trans }}</a>
                         </li>
                     {% endif %}
                 </ul>
