@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "sass-compile": "node node_modules/sass/sass.js src/scss/base.scss:../../../../public/css/style.css --style compressed --no-source-map"
+    "sass-compile": "node node_modules/sass/sass.js src/scss/base.scss:../../public/css/style.css --style compressed --no-source-map"
   },
   "keywords": [],
   "author": "JD297",

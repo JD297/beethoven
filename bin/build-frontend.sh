@@ -9,3 +9,5 @@ export FRONTEND_ROOT="${FRONTEND_ROOT:-"${PROJECT_ROOT}/src/Resources/app/fronte
 # build storefront
 npm --prefix "${FRONTEND_ROOT}" install
 npm --prefix "${FRONTEND_ROOT}" run sass-compile
+
+bin/console assets:install public
