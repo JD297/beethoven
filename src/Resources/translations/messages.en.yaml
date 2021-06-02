@@ -14,8 +14,9 @@ frontend:
         post:
             header-text: 'Posts'
             body-text: 'Posts %number%'
-            'answers': 'Answers: %number%'
-            'views': 'Views: %number%'
+            answers: 'Answers: %number%'
+            views: 'Views: %number%'
+            button-post: 'Post'
     page:
         auth:
             login:
@@ -28,7 +29,7 @@ frontend:
                         label: 'Your Password'
                         placeholder: 'Password'
                     button:
-                        show: 'Submit'
+                        show: 'Login'
             register:
                 title: 'Sign Up'
                 input:
@@ -39,13 +40,15 @@ frontend:
                         label: 'Your Password'
                         placeholder: 'Password'
                     button:
-                        show: 'Submit'
+                        show: 'Register'
         post:
             index:
                 user-timestamp: 'by <strong>%username%</strong> at %date%'
                 input:
                     comment:
                         placeholder: 'Write something'
+                    button:
+                        show: 'Comment'
             create:
                 title: 'Create Post'
                 input:

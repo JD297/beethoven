@@ -23,7 +23,9 @@
         </div>
 
         <div class="my-3">
-            {{ form_widget(form.submit, {'attr': {'class': 'btn btn-primary'}}) }}
+            {{ form_widget(form.submit, {'attr': {
+                'class': 'btn btn-primary'
+            }, 'label': 'frontend.page.auth.register.input.button.show'|trans}) }}
         </div>
     {{ form_end(form) }}
 {% endblock %}

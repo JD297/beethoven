@@ -27,8 +27,8 @@
             {{ form_errors(postForm.content) }}
         </div>
 
-        <div class="my-3">
-            <button type="submit" class="btn btn-primary">{{ 'frontend.page.post.create.input.button.show'|trans }}</button>
-        </div>
+        {{ form_widget(postForm.submit, {'attr': {
+            'class': 'btn btn-primary my-3'
+        }, 'label': 'frontend.page.post.create.input.button.show'|trans}) }}
     {{ form_end(postForm) }}
 {% endblock %}
