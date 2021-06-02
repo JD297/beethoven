@@ -4,6 +4,15 @@ frontend:
         logout: 'Log Out'
         login: 'Log In'
         register: 'Sign Up'
+    generel:
+        statistic:
+            header-text: 'Statistics'
+        contribution:
+            header-text: 'Last contribution'
+            body-text: 'Contributions: %number%'
+            link: '%date% by %username%'
+        post:
+            body-text: 'Posts %number%'
     page:
         auth:
             login:
