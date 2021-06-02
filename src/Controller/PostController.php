@@ -4,8 +4,10 @@ namespace App\Controller;
 
 use App\Entity\Comment;
 use App\Entity\Post;
+use App\Entity\Topic;
 use App\Entity\User;
 use App\Page\Post\CommentFormType;
+use App\Page\Post\PostFormType;
 use App\Page\Post\PostPageLoader;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -47,8 +49,6 @@ class PostController extends AbstractController
 	 */
 	public function addComment(Post $post, Request $request): Response
 	{
-		$comment = new Comment();
-
 		$form = $this->createForm(CommentFormType::class);
 		$form->handleRequest($request);
 
@@ -56,6 +56,7 @@ class PostController extends AbstractController
 		$user = $this->getUser();
 
 		if ($form->isSubmitted() && $form->isValid() && $user) {
+			$comment = new Comment();
 			$comment
 				->setContent($form->get('content')->getData())
 				->setUser($user)
@@ -73,4 +74,75 @@ class PostController extends AbstractController
 			'postId' => $post->getId(),
 		]);
 	}
+
+	/**
+	 * @Route("/post/{topicId}/create", name="frontend.post.create.view.page", requirements={"topicId"="\d+"}, methods={"GET"})
+	 * @ParamConverter("topic", options={"id" = "topicId"})
+	 * @param Topic $topic
+	 * @return Response
+	 */
+	public function createView(Topic $topic): Response
+	{
+		/** @var User $user */
+		$user = $this->getUser();
+
+		if(!$user instanceof User) {
+			return $this->redirectToRoute('frontend.topic.index.page', [
+				'topicId' => $topic->getId()
+			]);
+		}
+
+		$form = $this->createForm(PostFormType::class);
+
+		return $this->render('@Frontend/page/post/create.html.twig', [
+			'postForm' => $form->createView(),
+		]);
+	}
+
+	/**
+	 * @Route("/post/{topicId}/create", name="frontend.post.create.action.page", requirements={"topicId"="\d+"}, methods={"POST"})
+	 * @ParamConverter("topic", options={"id" = "topicId"})
+	 * @param Topic $topic
+	 * @param Request $request
+	 * @return Response
+	 */
+	public function createAction(Topic $topic, Request $request): Response
+	{
+		/** @var User $user */
+		$user = $this->getUser();
+
+		if(!$user instanceof User) {
+			return $this->redirectToRoute('frontend.topic.index.page', [
+				'topicId' => $topic->getId()
+			]);
+		}
+
+		$form = $this->createForm(PostFormType::class);
+		$form->handleRequest($request);
+
+		if ($form->isSubmitted() && $form->isValid()) {
+			$post = new Post();
+			$post
+				->setName($form->get('name')->getData())
+				->setContent($form->get('content')->getData())
+				->setUser($user)
+				->setTopic($topic)
+			;
+
+			$entityManager = $this->getDoctrine()->getManager();
+			$entityManager->persist($post);
+			$entityManager->flush();
+
+			return $this->redirectToRoute('frontend.topic.index.page', [
+				'topicId' => $topic->getId()
+			]);
+		}
+
+		$this->addFlash('error', 'Sorry, this post can not be added.');
+
+		return $this->render('@Frontend/page/post/create.html.twig', [
+			'postForm' => $form->createView(),
+		]);
+	}
+
 }

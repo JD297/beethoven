@@ -46,3 +46,12 @@ frontend:
                 input:
                     comment:
                         placeholder: 'Write something'
+            create:
+                title: 'Create Post'
+                input:
+                    name:
+                        placeholder: 'Title'
+                    content:
+                        placeholder: 'Write something'
+                    button:
+                        show: 'Post'

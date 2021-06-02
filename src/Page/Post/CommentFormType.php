@@ -18,7 +18,7 @@ class CommentFormType extends AbstractType
 			->add('content', TextareaType::class, [
 				'constraints' => [
 					new NotBlank([
-						'message' => 'Comment should to be empty'
+						'message' => 'Comment could not be empty'
 					])
 				]
 			])
