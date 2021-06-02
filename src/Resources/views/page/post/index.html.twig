@@ -8,14 +8,14 @@
     <p style="white-space: pre-wrap;">{{ post.content }}</p>
 
     <div class="blockquote-footer text-primary border-bottom border-secondary pb-2 mb-2">
-        by <strong>{{ post.user.username }}</strong> at {{ post.createdAt|date }}
+        {{ 'frontend.page.post.index.user-timestamp'|trans({'%username%': post.user.username, '%date%': post.createdAt|date})|raw }}
     </div>
 
     {% for comment in post.comments %}
         <p style="white-space: pre-wrap;">{{ comment.content }}</p>
 
         <div class="blockquote-footer text-primary border-bottom border-secondary pb-2 mb-2">
-            by <strong>{{ comment.user.username }}</strong> at {{ comment.createdAt|date }}
+            {{ 'frontend.page.post.index.user-timestamp'|trans({'%username%': comment.user.username, '%date%': comment.createdAt|date})|raw }}
         </div>
     {% endfor %}
 
@@ -31,7 +31,7 @@
                 <div class="form-group">
                     {{ form_widget(commentForm.content, {'attr': {
                         'class': 'form-control text-white bg-dark',
-                        'placeholder': 'Write something...'
+                        'placeholder': 'frontend.page.post.index.input.comment.placeholder'|trans
                     }}) }}
                     {{ form_errors(commentForm.content) }}
                 </div>

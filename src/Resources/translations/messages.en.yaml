@@ -40,3 +40,9 @@ frontend:
                         placeholder: 'Password'
                     button:
                         show: 'Submit'
+        post:
+            index:
+                user-timestamp: 'by <strong>%username%</strong> at %date%'
+                input:
+                    comment:
+                        placeholder: 'Write something'
