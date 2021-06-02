@@ -4,3 +4,16 @@ frontend:
         logout: 'Log Out'
         login: 'Log In'
         register: 'Sign Up'
+    page:
+        auth:
+            login:
+                title: 'Log In'
+                input:
+                    username:
+                        label: 'Your Username'
+                        placeholder: 'Username'
+                    password:
+                        label: 'Your Password'
+                        placeholder: 'Password'
+                    button:
+                        show: 'Submit'

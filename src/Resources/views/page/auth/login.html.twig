@@ -1,7 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% block base_content_inner %}
-    <h1 class="border-bottom border-secondary pb-2">Log In</h1>
+    <h1 class="border-bottom border-secondary pb-2">{{ 'frontend.page.auth.login.title'|trans }}</h1>
 
     <form method="post">
         {% if error %}
@@ -9,17 +9,17 @@
         {% endif %}
 
         <div class="my-3">
-            <label for="login_form_username" class="required">Your Username</label>
-            <input type="text" id="login_form_username" name="username" required="required" class="form-control mt-1 mb-2" placeholder="Username">
+            <label for="login_form_username" class="required">{{ 'frontend.page.auth.login.input.username.label'|trans }}</label>
+            <input type="text" id="login_form_username" name="username" required="required" class="form-control mt-1 mb-2" placeholder="{{ 'frontend.page.auth.login.input.username.placeholder'|trans }}">
         </div>
 
         <div class="my-3">
-            <label for="login_form_password" class="required">Your Password</label>
-            <input type="password" id="login_form_password" name="password" required="required" class="form-control mt-1 mb-2" placeholder="Password">
+            <label for="login_form_password" class="required">{{ 'frontend.page.auth.login.input.password.label'|trans }}</label>
+            <input type="password" id="login_form_password" name="password" required="required" class="form-control mt-1 mb-2" placeholder="{{ 'frontend.page.auth.login.input.password.placeholder'|trans }}">
         </div>
 
         <div class="my-3">
-            <button type="submit" id="login_form_submit" name="login_form[submit]" class="btn btn-primary">Submit</button>
+            <button type="submit" id="login_form_submit" name="login_form[submit]" class="btn btn-primary">{{ 'frontend.page.auth.login.input.button.show'|trans }}</button>
         </div>
 
         <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
