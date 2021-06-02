@@ -17,3 +17,14 @@ frontend:
                         placeholder: 'Password'
                     button:
                         show: 'Submit'
+            register:
+                title: 'Sign Up'
+                input:
+                    username:
+                        label: 'Your Username'
+                        placeholder: 'Username'
+                    password:
+                        label: 'Your Password'
+                        placeholder: 'Password'
+                    button:
+                        show: 'Submit'
