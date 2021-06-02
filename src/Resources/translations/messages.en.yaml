@@ -12,7 +12,10 @@ frontend:
             body-text: 'Contributions: %number%'
             link: '%date% by %username%'
         post:
+            header-text: 'Posts'
             body-text: 'Posts %number%'
+            'answers': 'Answers: %number%'
+            'views': 'Views: %number%'
     page:
         auth:
             login:

@@ -8,9 +8,9 @@
     <table class="table table-hover table-striped table-dark text-center mt-4">
         <thead class="text-uppercase">
         <tr>
-            <th class="border-secondary w-50 text-start">posts</th>
-            <th class="border-secondary w-25">statistics</th>
-            <th class="border-secondary w-25">last contribution</th>
+            <th class="border-secondary w-50 text-start">{{ 'frontend.generel.post.header-text'|trans }}</th>
+            <th class="border-secondary w-25">{{ 'frontend.generel.statistic.header-text'|trans }}</th>
+            <th class="border-secondary w-25">{{ 'frontend.generel.contribution.header-text'|trans }}</th>
         </tr>
         </thead>
         <tbody>
@@ -22,11 +22,13 @@
                     </strong>
                 </td>
                 <td>
-                    <div>Answers: {{ post.comments.count }}</div>
-                    <div>Views: {{ post.views }}</div>
+                    <div>{{ 'frontend.generel.post.answers'|trans({'%number%': post.comments.count}) }}</div>
+                    <div>{{ 'frontend.generel.post.views'|trans({'%number%': post.views}) }}</div>
                 </td>
                 <td>
-                    <a class="link-primary text-decoration-none" href="#">{{ "now"|date("d M Y H:i") }} by username</a>
+                    <a class="link-primary text-decoration-none" href="#">
+                        {{ 'frontend.generel.contribution.link'|trans({'%date%': "now"|date("d M Y H:i"), '%username%': 'username'}) }}
+                    </a>
                 </td>
             </tr>
         {% endfor %}
