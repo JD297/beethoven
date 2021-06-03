@@ -2,6 +2,7 @@
 
 namespace App\Page\Home;
 
+use App\Event\Post\PostLoadedEvent;
 use App\Repository\ForumRepository;
 use Doctrine\Common\Collections\Criteria;
 use Doctrine\Common\Collections\Expr\Comparison;
@@ -33,8 +34,17 @@ class HomePageLoader
 			new HomeCriteriaLoadedEvent($criteria)
 		);
 
-		/** @var LazyCriteriaCollection $forumCollection */
 		$forumCollection = $this->forumRepository->matching($criteria);
+
+		foreach($forumCollection as $forum) {
+			foreach($forum->getTopics() as $topic) {
+				foreach($topic->getPosts() as $post) {
+					$this->eventDispatcher->dispatch(
+						new PostLoadedEvent($post)
+					);
+				}
+			}
+		}
 
 		$page = new HomePage($forumCollection);
 

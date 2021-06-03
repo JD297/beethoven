@@ -3,6 +3,7 @@
 namespace App\Page\Forum;
 
 use App\Entity\Forum;
+use App\Event\Post\PostLoadedEvent;
 use App\Repository\ForumRepository;
 use Doctrine\Common\Collections\Criteria;
 use Doctrine\Common\Collections\Expr\Comparison;
@@ -40,6 +41,14 @@ class ForumPageLoader
 
 		if(!$forum instanceof Forum) {
 			throw new NotFoundHttpException();
+		}
+
+		foreach($forum->getTopics() as $topic) {
+			foreach($topic->getPosts() as $post) {
+				$this->eventDispatcher->dispatch(
+					new PostLoadedEvent($post)
+				);
+			}
 		}
 
 		$page = new ForumPage($forum);
