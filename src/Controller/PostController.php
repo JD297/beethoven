@@ -4,13 +4,13 @@ namespace App\Controller;
 
 use App\Entity\Comment;
 use App\Entity\Post;
-use App\Entity\Topic;
 use App\Entity\User;
 use App\Page\Post\CommentFormType;
-use App\Page\Post\PostFormType;
+use App\Page\Post\CommentPrePersistEvent;
 use App\Page\Post\PostPageLoader;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -19,8 +19,14 @@ class PostController extends AbstractController
 {
 	private PostPageLoader $postPageLoader;
 
-	public function __construct(PostPageLoader $postPageLoader) {
+	private EventDispatcherInterface $eventDispatcher;
+
+	public function __construct(
+		PostPageLoader $postPageLoader,
+		EventDispatcherInterface $eventDispatcher
+	) {
 		$this->postPageLoader = $postPageLoader;
+		$this->eventDispatcher = $eventDispatcher;
 	}
 
 	/**
@@ -62,6 +68,10 @@ class PostController extends AbstractController
 				->setUser($user)
 				->setPost($post)
 			;
+
+			$this->eventDispatcher->dispatch(
+				new CommentPrePersistEvent($comment)
+			);
 
 			$entityManager = $this->getDoctrine()->getManager();
 			$entityManager->persist($comment);
