@@ -66,6 +66,11 @@ class Post
      */
     private $active = true;
 
+	/**
+	 * @var Comment|null
+	 */
+    private $lastContribution;
+
     public function __construct()
     {
         $this->comments = new ArrayCollection();
@@ -201,5 +206,17 @@ class Post
         $this->active = $active;
 
         return $this;
+    }
+
+    public function getLastContribution(): ?Comment
+    {
+		return $this->lastContribution;
+    }
+
+    public function setLastContribution(Comment $comment): self
+    {
+		$this->lastContribution = $comment;
+
+		return $this;
     }
 }
