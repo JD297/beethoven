@@ -3,6 +3,7 @@
 namespace App\Page\Topic;
 
 use App\Entity\Topic;
+use App\Event\Post\PostLoadedEvent;
 use App\Repository\TopicRepository;
 use Doctrine\Common\Collections\Criteria;
 use Doctrine\Common\Collections\Expr\Comparison;
@@ -40,6 +41,12 @@ class TopicPageLoader
 
 		if(!$topic instanceof Topic) {
 			throw new NotFoundHttpException();
+		}
+
+		foreach($topic->getPosts() as $post) {
+			$this->eventDispatcher->dispatch(
+				new PostLoadedEvent($post)
+			);
 		}
 
 		$page = new TopicPage($topic);
