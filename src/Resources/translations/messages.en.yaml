@@ -46,15 +46,15 @@ frontend:
                 user-timestamp: 'by %username% at %date%'
                 input:
                     comment:
-                        placeholder: 'Write something'
+                        placeholder: 'Write something...'
                     button:
                         show: 'Comment'
-            create:
-                title: 'Create Post'
+        topic:
+            index:
                 input:
                     name:
-                        placeholder: 'Title'
+                        placeholder: 'Post title'
                     content:
-                        placeholder: 'Write something'
+                        placeholder: 'Write something...'
                     button:
                         show: 'Post'
