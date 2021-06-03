@@ -3,6 +3,7 @@
 namespace App\Page\Home;
 
 use App\Event\Post\PostLoadedEvent;
+use App\Event\Topic\TopicLoadedEvent;
 use App\Repository\ForumRepository;
 use Doctrine\Common\Collections\Criteria;
 use Doctrine\Common\Collections\Expr\Comparison;
@@ -43,6 +44,10 @@ class HomePageLoader
 						new PostLoadedEvent($post)
 					);
 				}
+
+				$this->eventDispatcher->dispatch(
+					new TopicLoadedEvent($topic)
+				);
 			}
 		}
 

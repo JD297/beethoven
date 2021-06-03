@@ -4,6 +4,7 @@ namespace App\Page\Forum;
 
 use App\Entity\Forum;
 use App\Event\Post\PostLoadedEvent;
+use App\Event\Topic\TopicLoadedEvent;
 use App\Repository\ForumRepository;
 use Doctrine\Common\Collections\Criteria;
 use Doctrine\Common\Collections\Expr\Comparison;
@@ -49,6 +50,10 @@ class ForumPageLoader
 					new PostLoadedEvent($post)
 				);
 			}
+
+			$this->eventDispatcher->dispatch(
+				new TopicLoadedEvent($topic)
+			);
 		}
 
 		$page = new ForumPage($forum);

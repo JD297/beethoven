@@ -25,9 +25,11 @@
                     <div>{{ 'frontend.generel.contribution.body-text'|trans({'%number%': 0}) }}</div>
                 </td>
                 <td>
-                    <a class="link-primary text-decoration-none" href="#">
-                        {{ 'frontend.generel.contribution.link'|trans({'%date%': "now"|date("d M Y H:i"), '%username%': 'username'}) }}
-                    </a>
+                    {% set lastContribution = topic.lastContribution %}
+
+                    {% if lastContribution %}
+                        {{ 'frontend.page.post.index.user-timestamp'|trans({'%username%': lastContribution.user.username, '%date%': lastContribution.createdAt|date}) }}
+                    {% endif %}
                 </td>
             </tr>
         {% endfor %}
