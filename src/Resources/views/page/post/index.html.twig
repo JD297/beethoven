@@ -8,14 +8,14 @@
     <p style="white-space: pre-wrap;">{{ post.content }}</p>
 
     <div class="blockquote-footer text-primary border-bottom border-secondary pb-2 mb-2">
-        {{ 'frontend.page.post.index.user-timestamp'|trans({'%username%': post.user.username, '%date%': post.createdAt|date})|raw }}
+        {{ 'frontend.page.post.index.user-timestamp'|trans({'%username%': post.user.username, '%date%': post.createdAt|date}) }}
     </div>
 
     {% for comment in post.comments %}
         <p style="white-space: pre-wrap;">{{ comment.content }}</p>
 
         <div class="blockquote-footer text-primary border-bottom border-secondary pb-2 mb-2">
-            {{ 'frontend.page.post.index.user-timestamp'|trans({'%username%': comment.user.username, '%date%': comment.createdAt|date})|raw }}
+            {{ 'frontend.page.post.index.user-timestamp'|trans({'%username%': comment.user.username, '%date%': comment.createdAt|date}) }}
         </div>
     {% endfor %}
 

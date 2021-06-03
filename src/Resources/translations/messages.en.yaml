@@ -43,7 +43,7 @@ frontend:
                         show: 'Register'
         post:
             index:
-                user-timestamp: 'by <strong>%username%</strong> at %date%'
+                user-timestamp: 'by %username% at %date%'
                 input:
                     comment:
                         placeholder: 'Write something'
