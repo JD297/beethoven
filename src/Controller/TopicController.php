@@ -6,9 +6,11 @@ use App\Entity\Post;
 use App\Entity\Topic;
 use App\Entity\User;
 use App\Page\Post\PostFormType;
+use App\Page\Post\PostPrePersistEvent;
 use App\Page\Topic\TopicPageLoader;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -17,8 +19,11 @@ class TopicController extends AbstractController
 {
 	private TopicPageLoader $topicPageLoader;
 
-	public function __construct(TopicPageLoader $topicPageLoader) {
+	private EventDispatcherInterface $eventDispatcher;
+
+	public function __construct(TopicPageLoader $topicPageLoader, EventDispatcherInterface $eventDispatcher) {
 		$this->topicPageLoader = $topicPageLoader;
+		$this->eventDispatcher = $eventDispatcher;
 	}
 
 	/**
@@ -61,6 +66,10 @@ class TopicController extends AbstractController
 				->setUser($user)
 				->setTopic($topic)
 			;
+
+			$this->eventDispatcher->dispatch(
+				new PostPrePersistEvent($post)
+			);
 
 			$entityManager = $this->getDoctrine()->getManager();
 			$entityManager->persist($post);
