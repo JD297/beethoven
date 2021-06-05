@@ -43,12 +43,6 @@ class TopicPageLoader
 			throw new NotFoundHttpException();
 		}
 
-		foreach($topic->getPosts() as $post) {
-			$this->eventDispatcher->dispatch(
-				new PostLoadedEvent($post)
-			);
-		}
-
 		$page = new TopicPage($topic);
 
 		$this->eventDispatcher->dispatch(

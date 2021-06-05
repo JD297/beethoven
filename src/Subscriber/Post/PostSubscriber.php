@@ -2,9 +2,6 @@
 
 namespace App\Subscriber\Post;
 
-use App\Entity\Comment;
-use App\Entity\Post;
-use App\Event\Post\PostLoadedEvent;
 use App\Page\Post\PostPage;
 use App\Page\Post\PostPageLoadedEvent;
 use Doctrine\ORM\EntityManagerInterface;
@@ -28,9 +25,6 @@ class PostSubscriber implements EventSubscriberInterface
 			PostPageLoadedEvent::class => [
 				['addView', 0],
 			],
-			PostLoadedEvent::class => [
-				['lastContribution', 0],
-			],
 		];
 	}
 
@@ -43,17 +37,5 @@ class PostSubscriber implements EventSubscriberInterface
 
 		$this->entityManager->persist($post);
 		$this->entityManager->flush();
-	}
-
-	public function lastContribution(PostLoadedEvent $event)
-	{
-		/** @var Post $post */
-		$post = $event->getEntity();
-
-		$lastComment = $post->getComments()->last();
-
-		if($lastComment instanceof Comment) {
-			$post->setLastContribution($lastComment);
-		}
 	}
 }

@@ -1,30 +1,16 @@
 <?php declare(strict_types=1);
 
-namespace App\Subscriber\Topic;
+namespace App\EventListener;
 
 use App\Entity\Comment;
-use App\Entity\Post;
 use App\Entity\Topic;
-use App\Event\Topic\TopicLoadedEvent;
 use Doctrine\Common\Collections\ArrayCollection;
-use Symfony\Component\EventDispatcher\EventSubscriberInterface;
+use Doctrine\Persistence\Event\LifecycleEventArgs;
 
-class TopicSubscriber implements EventSubscriberInterface
+class TopicListener
 {
-	public static function getSubscribedEvents(): array
+	public function postLoad(Topic $topic, LifecycleEventArgs $event): void
 	{
-		return [
-			TopicLoadedEvent::class => [
-				['lastContribution', 0],
-			],
-		];
-	}
-
-	public function lastContribution(TopicLoadedEvent $event)
-	{
-		/** @var Topic $topic */
-		$topic = $event->getEntity();
-
 		$posts = $topic->getPosts();
 
 		if($posts->count() === 0) {

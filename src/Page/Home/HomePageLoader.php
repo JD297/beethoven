@@ -37,20 +37,6 @@ class HomePageLoader
 
 		$forumCollection = $this->forumRepository->matching($criteria);
 
-		foreach($forumCollection as $forum) {
-			foreach($forum->getTopics() as $topic) {
-				foreach($topic->getPosts() as $post) {
-					$this->eventDispatcher->dispatch(
-						new PostLoadedEvent($post)
-					);
-				}
-
-				$this->eventDispatcher->dispatch(
-					new TopicLoadedEvent($topic)
-				);
-			}
-		}
-
 		$page = new HomePage($forumCollection);
 
 		$this->eventDispatcher->dispatch(

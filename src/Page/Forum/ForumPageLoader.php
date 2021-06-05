@@ -44,18 +44,6 @@ class ForumPageLoader
 			throw new NotFoundHttpException();
 		}
 
-		foreach($forum->getTopics() as $topic) {
-			foreach($topic->getPosts() as $post) {
-				$this->eventDispatcher->dispatch(
-					new PostLoadedEvent($post)
-				);
-			}
-
-			$this->eventDispatcher->dispatch(
-				new TopicLoadedEvent($topic)
-			);
-		}
-
 		$page = new ForumPage($forum);
 
 		$this->eventDispatcher->dispatch(
