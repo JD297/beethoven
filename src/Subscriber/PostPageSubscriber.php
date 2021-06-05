@@ -1,13 +1,13 @@
 <?php declare(strict_types=1);
 
-namespace App\Subscriber\Post;
+namespace App\Subscriber;
 
 use App\Page\Post\PostPage;
 use App\Page\Post\PostPageLoadedEvent;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
-class PostSubscriber implements EventSubscriberInterface
+class PostPageSubscriber implements EventSubscriberInterface
 {
 	/**
 	 * @var EntityManagerInterface $entityManager
@@ -19,7 +19,7 @@ class PostSubscriber implements EventSubscriberInterface
 		$this->entityManager = $entityManager;
 	}
 
-	public static function getSubscribedEvents()
+	public static function getSubscribedEvents(): array
 	{
 		return [
 			PostPageLoadedEvent::class => [
