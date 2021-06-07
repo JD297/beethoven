@@ -11,22 +11,18 @@ class TopicListener
 {
 	public function postLoad(Topic $topic, LifecycleEventArgs $event): void
 	{
-		$posts = $topic->getPosts();
+		$iteratorPosts = $topic->getPosts()->getIterator();
 
-		if($posts->count() === 0) {
+		if($iteratorPosts->count() === 0) {
 			return;
 		}
 
-		$iteratorPosts = $topic->getPosts()->getIterator();
-
-		// sort by last contribution asc
+		// sort by last contribution desc
 		$iteratorPosts->uasort(function ($a, $b) {
-			return $a->getLastcontribution() <=> $b->getLastcontribution();
+			return $b->getLastcontribution() <=> $a->getLastcontribution();
 		});
 
-		$postsSorted = new ArrayCollection(iterator_to_array($iteratorPosts));
-
-		$lastContribution = $postsSorted->last()->getLastcontribution();
+		$lastContribution = $iteratorPosts->current()->getLastcontribution();
 
 		if($lastContribution instanceof Comment) {
 			$topic->setLastContribution($lastContribution);
