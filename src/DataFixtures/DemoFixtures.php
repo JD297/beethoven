@@ -40,6 +40,18 @@ Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod 
 		    ));
 		$manager->persist($user);
 
+		$admin = new User();
+		$admin
+			->setUsername('admin')
+			->setPassword(
+				$this->passwordEncoder->encodePassword(
+					$admin,
+					'admin'
+				)
+			)
+			->setRoles(['ROLE_ADMIN']);
+		$manager->persist($admin);
+
     	$forum1 = new Forum();
 		$forum1->setName('Beethoven demo forum I');
 
