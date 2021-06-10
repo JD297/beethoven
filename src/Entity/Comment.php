@@ -44,15 +44,20 @@ class Comment
      */
     private $post;
 
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $active = true;
+
     public function __construct()
     {
 	    $this->createdAt = new \DateTime();
     }
 
 	public function getId(): ?int
-    {
-        return $this->id;
-    }
+             {
+                 return $this->id;
+             }
 
     public function getContent(): ?string
     {
@@ -110,6 +115,18 @@ class Comment
     public function setPost(?Post $post): self
     {
         $this->post = $post;
+
+        return $this;
+    }
+
+    public function getActive(): ?bool
+    {
+        return $this->active;
+    }
+
+    public function setActive(bool $active): self
+    {
+        $this->active = $active;
 
         return $this;
     }
