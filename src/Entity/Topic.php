@@ -55,7 +55,12 @@ class Topic
         $this->posts = new ArrayCollection();
     }
 
-    public function getId(): ?int
+    public function __toString(): string
+    {
+	    return $this->getName();
+    }
+
+	public function getId(): ?int
     {
         return $this->id;
     }
