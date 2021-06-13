@@ -31,7 +31,7 @@ class Topic
 
     /**
      * @ORM\ManyToOne(targetEntity=Forum::class, inversedBy="topics")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\JoinColumn(nullable=true)
      */
     private $forum;
 
