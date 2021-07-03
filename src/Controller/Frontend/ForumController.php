@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace App\Controller;
+namespace App\Controller\Frontend;
 
 use App\Page\Forum\ForumPageLoader;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;

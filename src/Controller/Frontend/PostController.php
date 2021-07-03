@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace App\Controller;
+namespace App\Controller\Frontend;
 
 use App\Entity\Comment;
 use App\Entity\Post;
