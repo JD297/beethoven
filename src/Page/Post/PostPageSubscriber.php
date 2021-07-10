@@ -1,9 +1,7 @@
 <?php declare(strict_types=1);
 
-namespace App\Subscriber;
+namespace App\Page\Post;
 
-use App\Page\Post\PostPage;
-use App\Page\Post\PostPageLoadedEvent;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
