@@ -119,6 +119,16 @@ class Topic
         return $this;
     }
 
+	/**
+	 * @param Collection|Post[] $posts
+	 */
+	public function setPosts(Collection $posts): self
+	{
+		$this->posts = $posts;
+
+		return $this;
+	}
+
     public function removePost(Post $post): self
     {
         if ($this->posts->removeElement($post)) {
