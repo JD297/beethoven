@@ -13,6 +13,8 @@ class TopicListener
 		$this->filterActivePosts($topic);
 
 		$this->setLastContribution($topic);
+
+		$this->setContributionCount($topic);
 	}
 
 	private function setLastContribution(Topic $topic): void
@@ -42,5 +44,14 @@ class TopicListener
 		});
 
 		$topic->setPosts($posts);
+	}
+
+	private function setContributionCount(Topic $topic): void
+	{
+		foreach($topic->getPosts() as $post) {
+			$topic->setContributionCount(
+				$topic->getContributionCount() + $post->getComments()->count()
+			);
+		}
 	}
 }

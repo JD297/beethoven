@@ -50,6 +50,11 @@ class Topic
 	 */
 	private $lastContribution;
 
+	/**
+	 * @var int
+	 */
+	private $contributionCount = 0;
+
     public function __construct()
     {
         $this->posts = new ArrayCollection();
@@ -161,6 +166,18 @@ class Topic
 	public function setLastContribution(Comment $comment): self
 	{
 		$this->lastContribution = $comment;
+
+		return $this;
+	}
+
+	public function getContributionCount(): int
+	{
+		return $this->contributionCount;
+	}
+
+	public function setContributionCount(int $count): self
+	{
+		$this->contributionCount = $count;
 
 		return $this;
 	}

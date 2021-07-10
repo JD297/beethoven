@@ -150,6 +150,16 @@ class Post
         return $this->comments;
     }
 
+	/**
+	 * @var Collection|Comment[] $comments
+	 */
+    public function setComments(Collection $comments): self
+    {
+		$this->comments = $comments;
+
+		return $this;
+    }
+
     public function addComment(Comment $comment): self
     {
         if (!$this->comments->contains($comment)) {
