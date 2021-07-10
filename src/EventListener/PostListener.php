@@ -10,7 +10,9 @@ class PostListener
 {
 	public function postLoad(Post $post, LifecycleEventArgs $event): void
 	{
-		$lastComment = $post->getComments()->last();
+		$lastComment = $post->getComments()->filter(function($comment) {
+			return $comment->getActive();
+		})->last();
 
 		if($lastComment instanceof Comment) {
 			$post->setLastContribution($lastComment);
