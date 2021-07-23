@@ -35,3 +35,6 @@ If you want a quick overview over beethoven then start with the demo fixtures:
 # load demo fixtures
 $ bin/console doctrine:fixtures:load
 ```
+
+## License
+Beethoven is completly free and released under the [BSD-2-Clause License](LICENSE.md).
