@@ -1,12 +1,12 @@
 <?php declare(strict_types=1);
 
-namespace App\Controller\Admin;
+namespace Beethoven\Controller\Admin;
 
-use App\Entity\Comment;
-use App\Entity\Forum;
-use App\Entity\Post;
-use App\Entity\Topic;
-use App\Entity\User;
+use Beethoven\Entity\Comment;
+use Beethoven\Entity\Forum;
+use Beethoven\Entity\Post;
+use Beethoven\Entity\Topic;
+use Beethoven\Entity\User;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractDashboardController;

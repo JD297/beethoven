@@ -1,8 +1,8 @@
 <?php declare(strict_types=1);
 
-namespace App\Page;
+namespace Beethoven\Page;
 
-use App\Framework\Struct\ArrayStruct;
+use Beethoven\Framework\Struct\ArrayStruct;
 
 abstract class Page
 {

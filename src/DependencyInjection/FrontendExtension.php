@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace App\DependencyInjection;
+namespace Beethoven\DependencyInjection;
 
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;

@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Repository;
+namespace Beethoven\Repository;
 
-use App\Entity\Comment;
+use Beethoven\Entity\Comment;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 

@@ -1,9 +1,9 @@
 <?php declare(strict_types=1);
 
-namespace App\Page\Topic;
+namespace Beethoven\Page\Topic;
 
-use App\Entity\Topic;
-use App\Page\Page;
+use Beethoven\Entity\Topic;
+use Beethoven\Page\Page;
 
 class TopicPage extends Page
 {

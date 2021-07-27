@@ -1,8 +1,8 @@
 <?php declare(strict_types=1);
 
-namespace App\EventListener\Post;
+namespace Beethoven\EventListener\Post;
 
-use App\Entity\Post;
+use Beethoven\Entity\Post;
 use Doctrine\Persistence\Event\LifecycleEventArgs;
 
 class FilterActiveCommentsListener

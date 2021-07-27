@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Entity;
+namespace Beethoven\Entity;
 
-use App\Repository\CommentRepository;
+use Beethoven\Repository\CommentRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 /**

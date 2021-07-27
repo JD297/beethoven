@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Entity;
+namespace Beethoven\Entity;
 
-use App\Repository\PostRepository;
+use Beethoven\Repository\PostRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;

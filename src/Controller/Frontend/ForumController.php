@@ -1,8 +1,8 @@
 <?php declare(strict_types=1);
 
-namespace App\Controller\Frontend;
+namespace Beethoven\Controller\Frontend;
 
-use App\Page\Forum\ForumPageLoader;
+use Beethoven\Page\Forum\ForumPageLoader;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;

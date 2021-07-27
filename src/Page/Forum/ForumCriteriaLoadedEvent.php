@@ -1,8 +1,8 @@
 <?php declare(strict_types=1);
 
-namespace App\Page\Forum;
+namespace Beethoven\Page\Forum;
 
-use App\Page\CriteriaLoadedEvent;
+use Beethoven\Page\CriteriaLoadedEvent;
 
 class ForumCriteriaLoadedEvent extends CriteriaLoadedEvent
 {

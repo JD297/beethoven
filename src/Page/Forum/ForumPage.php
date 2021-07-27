@@ -1,9 +1,9 @@
 <?php declare(strict_types=1);
 
-namespace App\Page\Forum;
+namespace Beethoven\Page\Forum;
 
-use App\Entity\Forum;
-use App\Page\Page;
+use Beethoven\Entity\Forum;
+use Beethoven\Page\Page;
 
 class ForumPage extends Page
 {

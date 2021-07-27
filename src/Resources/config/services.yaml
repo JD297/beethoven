@@ -1,35 +1,35 @@
 services:
-    App\EventListener\Topic\FilterActivePostsListener:
+    Beethoven\EventListener\Topic\FilterActivePostsListener:
         tags:
             -   name: 'doctrine.orm.entity_listener'
                 event: 'postLoad'
-                entity: 'App\Entity\Topic'
+                entity: 'Beethoven\Entity\Topic'
                 priority: 50
 
-    App\EventListener\Topic\SetLastContributionListener:
+    Beethoven\EventListener\Topic\SetLastContributionListener:
         tags:
             -   name: 'doctrine.orm.entity_listener'
                 event: 'postLoad'
-                entity: 'App\Entity\Topic'
+                entity: 'Beethoven\Entity\Topic'
                 priority: 40
 
-    App\EventListener\Topic\SetLastContributionCountListener:
+    Beethoven\EventListener\Topic\SetLastContributionCountListener:
         tags:
             -   name: 'doctrine.orm.entity_listener'
                 event: 'postLoad'
-                entity: 'App\Entity\Topic'
+                entity: 'Beethoven\Entity\Topic'
                 priority: 30
 
-    App\EventListener\Post\FilterActiveCommentsListener:
+    Beethoven\EventListener\Post\FilterActiveCommentsListener:
         tags:
             -   name: 'doctrine.orm.entity_listener'
                 event: 'postLoad'
-                entity: 'App\Entity\Post'
+                entity: 'Beethoven\Entity\Post'
                 priority: 50
 
-    App\EventListener\Post\SetLastContributionListener:
+    Beethoven\EventListener\Post\SetLastContributionListener:
         tags:
             -   name: 'doctrine.orm.entity_listener'
                 event: 'postLoad'
-                entity: 'App\Entity\Post'
+                entity: 'Beethoven\Entity\Post'
                 priority: 40

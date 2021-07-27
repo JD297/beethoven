@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace App\Page\Post;
+namespace Beethoven\Page\Post;
 
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;

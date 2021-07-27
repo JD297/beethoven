@@ -1,8 +1,8 @@
 <?php declare(strict_types=1);
 
-namespace App\Controller\Admin;
+namespace Beethoven\Controller\Admin;
 
-use App\Entity\Topic;
+use Beethoven\Entity\Topic;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\BooleanField;

@@ -1,8 +1,8 @@
 <?php declare(strict_types=1);
 
-namespace App\Controller\Admin;
+namespace Beethoven\Controller\Admin;
 
-use App\Entity\Forum;
+use Beethoven\Entity\Forum;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\BooleanField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;

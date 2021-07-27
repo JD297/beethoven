@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Command;
+namespace Beethoven\Command;
 
-use App\Entity\User;
+use Beethoven\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
