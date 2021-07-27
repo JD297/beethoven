@@ -1,10 +1,10 @@
 <?php declare(strict_types=1);
 
-namespace App\Page\Home;
+namespace Beethoven\Page\Home;
 
-use App\Event\Post\PostLoadedEvent;
-use App\Event\Topic\TopicLoadedEvent;
-use App\Repository\ForumRepository;
+use Beethoven\Event\Post\PostLoadedEvent;
+use Beethoven\Event\Topic\TopicLoadedEvent;
+use Beethoven\Repository\ForumRepository;
 use Doctrine\Common\Collections\Criteria;
 use Doctrine\Common\Collections\Expr\Comparison;
 use Doctrine\Common\Collections\Expr\CompositeExpression;

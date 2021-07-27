@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Page\Auth\Register;
+namespace Beethoven\Page\Auth\Register;
 
-use App\Entity\User;
+use Beethoven\Entity\User;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;

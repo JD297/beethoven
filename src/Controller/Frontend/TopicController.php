@@ -1,12 +1,12 @@
 <?php declare(strict_types=1);
 
-namespace App\Controller\Frontend;
+namespace Beethoven\Controller\Frontend;
 
-use App\Entity\Post;
-use App\Entity\Topic;
-use App\Entity\User;
-use App\Page\Post\PostFormType;
-use App\Page\Topic\TopicPageLoader;
+use Beethoven\Entity\Post;
+use Beethoven\Entity\Topic;
+use Beethoven\Entity\User;
+use Beethoven\Page\Post\PostFormType;
+use Beethoven\Page\Topic\TopicPageLoader;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;

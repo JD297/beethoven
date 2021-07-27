@@ -1,9 +1,9 @@
 <?php declare(strict_types=1);
 
-namespace App\Page\Post;
+namespace Beethoven\Page\Post;
 
-use App\Entity\Post;
-use App\Repository\PostRepository;
+use Beethoven\Entity\Post;
+use Beethoven\Repository\PostRepository;
 use Doctrine\Common\Collections\Criteria;
 use Doctrine\Common\Collections\Expr\Comparison;
 use Doctrine\Common\Collections\Expr\CompositeExpression;

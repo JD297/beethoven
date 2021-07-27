@@ -1,8 +1,8 @@
 <?php declare(strict_types=1);
 
-namespace App\Page;
+namespace Beethoven\Page;
 
-use App\Framework\Event\Event;
+use Beethoven\Framework\Event\Event;
 use Doctrine\Common\Collections\Criteria;
 
 abstract class CriteriaLoadedEvent extends Event

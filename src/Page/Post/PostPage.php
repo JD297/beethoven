@@ -1,9 +1,9 @@
 <?php declare(strict_types=1);
 
-namespace App\Page\Post;
+namespace Beethoven\Page\Post;
 
-use App\Entity\Post;
-use App\Page\Page;
+use Beethoven\Entity\Post;
+use Beethoven\Page\Page;
 
 class PostPage extends Page
 {

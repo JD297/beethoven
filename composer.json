@@ -64,12 +64,12 @@
     },
     "autoload": {
         "psr-4": {
-            "App\\": "src/"
+            "Beethoven\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "App\\Tests\\": "tests/"
+            "Beethoven\\Tests\\": "tests/"
         }
     },
     "replace": {

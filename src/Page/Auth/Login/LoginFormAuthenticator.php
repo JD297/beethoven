@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Page\Auth\Login;
+namespace Beethoven\Page\Auth\Login;
 
-use App\Entity\User;
+use Beethoven\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;

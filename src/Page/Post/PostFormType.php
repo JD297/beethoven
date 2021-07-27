@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Page\Post;
+namespace Beethoven\Page\Post;
 
-use App\Entity\Post;
+use Beethoven\Entity\Post;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;

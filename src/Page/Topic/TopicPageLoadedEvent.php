@@ -1,8 +1,8 @@
 <?php declare(strict_types=1);
 
-namespace App\Page\Topic;
+namespace Beethoven\Page\Topic;
 
-use App\Page\PageLoadedEvent;
+use Beethoven\Page\PageLoadedEvent;
 
 class TopicPageLoadedEvent extends PageLoadedEvent
 {

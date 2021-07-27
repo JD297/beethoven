@@ -1,9 +1,9 @@
 <?php declare(strict_types=1);
 
-namespace App\EventListener;
+namespace Beethoven\EventListener;
 
-use App\Entity\Comment;
-use App\Entity\Topic;
+use Beethoven\Entity\Comment;
+use Beethoven\Entity\Topic;
 use Doctrine\Persistence\Event\LifecycleEventArgs;
 
 class TopicListener

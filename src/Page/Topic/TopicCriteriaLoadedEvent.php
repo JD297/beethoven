@@ -1,8 +1,8 @@
 <?php declare(strict_types=1);
 
-namespace App\Page\Topic;
+namespace Beethoven\Page\Topic;
 
-use App\Page\CriteriaLoadedEvent;
+use Beethoven\Page\CriteriaLoadedEvent;
 
 class TopicCriteriaLoadedEvent extends CriteriaLoadedEvent
 {

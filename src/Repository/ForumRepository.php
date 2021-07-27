@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Repository;
+namespace Beethoven\Repository;
 
-use App\Entity\Forum;
+use Beethoven\Entity\Forum;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 

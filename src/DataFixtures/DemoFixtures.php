@@ -1,12 +1,12 @@
 <?php
 
-namespace App\DataFixtures;
+namespace Beethoven\DataFixtures;
 
-use App\Entity\Comment;
-use App\Entity\Forum;
-use App\Entity\Post;
-use App\Entity\Topic;
-use App\Entity\User;
+use Beethoven\Entity\Comment;
+use Beethoven\Entity\Forum;
+use Beethoven\Entity\Post;
+use Beethoven\Entity\Topic;
+use Beethoven\Entity\User;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;

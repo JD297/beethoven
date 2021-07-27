@@ -1,12 +1,12 @@
 <?php declare(strict_types=1);
 
-namespace App\Controller\Frontend;
+namespace Beethoven\Controller\Frontend;
 
-use App\Entity\Comment;
-use App\Entity\Post;
-use App\Entity\User;
-use App\Page\Post\CommentFormType;
-use App\Page\Post\PostPageLoader;
+use Beethoven\Entity\Comment;
+use Beethoven\Entity\Post;
+use Beethoven\Entity\User;
+use Beethoven\Page\Post\CommentFormType;
+use Beethoven\Page\Post\PostPageLoader;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;

@@ -1,8 +1,8 @@
 <?php declare(strict_types=1);
 
-namespace App\Page\Home;
+namespace Beethoven\Page\Home;
 
-use App\Page\Page;
+use Beethoven\Page\Page;
 use Doctrine\ORM\LazyCriteriaCollection;
 
 class HomePage extends Page

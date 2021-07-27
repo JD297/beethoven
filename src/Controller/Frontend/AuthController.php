@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Controller\Frontend;
+namespace Beethoven\Controller\Frontend;
 
-use App\Entity\User;
-use App\Page\Auth\Register\RegisterFormType;
-use App\Page\Auth\Login\LoginFormAuthenticator;
+use Beethoven\Entity\User;
+use Beethoven\Page\Auth\Register\RegisterFormType;
+use Beethoven\Page\Auth\Login\LoginFormAuthenticator;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;

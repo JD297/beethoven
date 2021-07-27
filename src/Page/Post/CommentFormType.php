@@ -1,8 +1,8 @@
 <?php declare(strict_types=1);
 
-namespace App\Page\Post;
+namespace Beethoven\Page\Post;
 
-use App\Entity\Comment;
+use Beethoven\Entity\Comment;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
