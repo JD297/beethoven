@@ -1,12 +1,35 @@
 services:
-    App\EventListener\PostListener:
-        tags:
-            -   name: 'doctrine.orm.entity_listener'
-                event: 'postLoad'
-                entity: 'App\Entity\Post'
-
-    App\EventListener\TopicListener:
+    App\EventListener\Topic\FilterActivePostsListener:
         tags:
             -   name: 'doctrine.orm.entity_listener'
                 event: 'postLoad'
                 entity: 'App\Entity\Topic'
+                priority: 50
+
+    App\EventListener\Topic\SetLastContributionListener:
+        tags:
+            -   name: 'doctrine.orm.entity_listener'
+                event: 'postLoad'
+                entity: 'App\Entity\Topic'
+                priority: 40
+
+    App\EventListener\Topic\SetLastContributionCountListener:
+        tags:
+            -   name: 'doctrine.orm.entity_listener'
+                event: 'postLoad'
+                entity: 'App\Entity\Topic'
+                priority: 30
+
+    App\EventListener\Post\FilterActiveCommentsListener:
+        tags:
+            -   name: 'doctrine.orm.entity_listener'
+                event: 'postLoad'
+                entity: 'App\Entity\Post'
+                priority: 50
+
+    App\EventListener\Post\SetLastContributionListener:
+        tags:
+            -   name: 'doctrine.orm.entity_listener'
+                event: 'postLoad'
+                entity: 'App\Entity\Post'
+                priority: 40
