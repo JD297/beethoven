@@ -36,5 +36,19 @@ If you want a quick overview over beethoven then start with the demo fixtures:
 $ bin/console doctrine:fixtures:load
 ```
 
+## Development
+
+### PHP-CS-Fixer
+
+The PHP Coding Standards Fixer helps you to follow coding standards. This helps keeping the code base clean and nice. Before you create a pull request, it is required to run this tool and commit or amend the changes.
+
+```bash
+# Check the changes made by php-cs-fixer without changing anything
+$ vendor/bin/php-cs-fixer fix --diff --dry-run
+
+# Fix files according to the .php-cs-fixer.dist.php
+$ vendor/bin/php-cs-fixer fix
+```
+
 ## License
 Beethoven is completly free and released under the [BSD-2-Clause License](LICENSE.md).
