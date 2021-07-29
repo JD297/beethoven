@@ -51,4 +51,4 @@ $ vendor/bin/php-cs-fixer fix
 ```
 
 ## License
-Beethoven is completly free and released under the [BSD-2-Clause License](LICENSE.md).
+Beethoven is completely free and released under the [BSD-2-Clause License](LICENSE.md).
