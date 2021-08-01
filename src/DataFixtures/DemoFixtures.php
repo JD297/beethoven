@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Beethoven\DataFixtures;
 
@@ -8,122 +8,93 @@ use Beethoven\Entity\Post;
 use Beethoven\Entity\Topic;
 use Beethoven\Entity\User;
 use Doctrine\Bundle\FixturesBundle\Fixture;
+use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Persistence\ObjectManager;
-use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
-class DemoFixtures extends Fixture
+class DemoFixtures extends Fixture implements DependentFixtureInterface
 {
-	const DEMO_CONTENT = "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
+	const FORUM_NAMES = [
+		'Beethoven demo forum I',
+		'Beethoven demo forum II',
+	];
+
+	const TOPICS = [
+		[
+			'name' => 'Demo topic',
+			'description' => 'This is just a demo topic',
+		],
+		[
+			'name' => 'Another demo topic',
+			'description' => '',
+		],
+	];
+
+	const POST_NAME = 'Beethoven demo post %d';
+
+	const POST_CONTENT = "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
 
 Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
 Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.";
 
-	/**
-	 * @var UserPasswordEncoderInterface $passwordEncoder
-	 */
-	private UserPasswordEncoderInterface $passwordEncoder;
+	const COMMENT_CONTENT = "Lorem ipsum dolor sit amet, consetetur sadipscing elitr.
 
-	public function __construct(UserPasswordEncoderInterface $passwordEncoder)
-	{
-		$this->passwordEncoder = $passwordEncoder;
-	}
+Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat.";
 
-	public function load(ObjectManager $manager)
+	const NUMBER_OF_POSTS = 64;
+
+	const NUMBER_OF_COMMENTS = 48;
+
+	public function load(ObjectManager $manager): void
     {
-		$user = new User();
-		$user
-		    ->setUsername('demo')
-		    ->setPassword(
-			    $this->passwordEncoder->encodePassword(
-				    $user,
-				    'demo'
-		    ));
-		$manager->persist($user);
+    	/** @var User $demoUser */
+    	$demoUser = $this->getReference(UserFixtures::DEMO_USER_REFERENCE);
 
-		$admin = new User();
-		$admin
-			->setUsername('admin')
-			->setPassword(
-				$this->passwordEncoder->encodePassword(
-					$admin,
-					'admin'
-				)
-			)
-			->setRoles(['ROLE_ADMIN']);
-		$manager->persist($admin);
+    	foreach(self::FORUM_NAMES as $forumName) {
+		    $forum = new Forum();
+		    $forum->setName($forumName);
+		    $manager->persist($forum);
 
-    	$forum1 = new Forum();
-		$forum1->setName('Beethoven demo forum I');
+		    foreach(self::TOPICS as $topicData) {
+			    $topic = new Topic();
+			    $topic->setName($topicData['name']);
+			    $topic->setDescription($topicData['description']);
+			    $topic->setForum($forum);
+			    $manager->persist($topic);
 
-    	$topic1_1 = new Topic();
-    	$topic1_1->setName('Demo topic');
-    	$topic1_1->setDescription('This is just a demo topic');
-    	$topic1_1->setForum($forum1);
-    	$manager->persist($topic1_1);
+			    if(self::TOPICS[0] === $topicData) {
+					foreach (range(1 , self::NUMBER_OF_POSTS) as $postNumber) {
+						$post = new Post();
+						$post
+							->setName(sprintf(self::POST_NAME, $postNumber))
+							->setContent(self::POST_CONTENT)
+							->setTopic($topic)
+							->setUser($demoUser)
+						;
+						$manager->persist($post);
 
-		$post1_1_1 = new Post();
-		$post1_1_1
-		    ->setName('Demo Post in demo topic 1')
-		    ->setContent(self::DEMO_CONTENT)
-		    ->setTopic($topic1_1)
-		    ->setUser($user)
-	    ;
-		$manager->persist($post1_1_1);
+						if($postNumber === 1) {
+							foreach(range(1 , self::NUMBER_OF_COMMENTS) as $commentNumber) {
+								$comment = new Comment();
+								$comment
+									->setContent(self::COMMENT_CONTENT)
+									->setUser($demoUser)
+									->setPost($post)
+								;
+								$manager->persist($comment);
+							}
+						}
+					}
+			    }
+		    }
+	    }
 
-		$comment1_1_1_1 = new Comment();
-		$comment1_1_1_1
-			->setContent(self::DEMO_CONTENT)
-			->setUser($user)
-			->setPost($post1_1_1)
-		;
-		$manager->persist($comment1_1_1_1);
-
-	    $comment1_1_1_2 = new Comment();
-	    $comment1_1_1_2
-		    ->setContent(self::DEMO_CONTENT)
-		    ->setUser($user)
-		    ->setPost($post1_1_1)
-	    ;
-	    $manager->persist($comment1_1_1_2);
-
-	    $post1_1_2 = new Post();
-	    $post1_1_2
-		    ->setName('Demo Post in demo topic 2')
-		    ->setContent(self::DEMO_CONTENT)
-		    ->setTopic($topic1_1)
-		    ->setUser($user)
-	    ;
-	    $manager->persist($post1_1_2);
-
-	    $topic1_2 = new Topic();
-	    $topic1_2->setName('Another demo topic');
-	    $topic1_2->setForum($forum1);
-	    $manager->persist($topic1_2);
-
-	    $manager->persist($forum1);
-
-	    $forum2 = new Forum();
-	    $forum2->setName('Beethoven demo forum II');
-
-	    $topic2_1 = new Topic();
-	    $topic2_1->setName('Demo topic');
-	    $topic2_1->setDescription('This is just a demo topic');
-	    $topic2_1->setForum($forum2);
-	    $manager->persist($topic2_1);
-
-	    $topic2_2 = new Topic();
-	    $topic2_2->setName('Another demo topic');
-	    $topic2_2->setForum($forum2);
-	    $manager->persist($topic2_2);
-
-	    $topic2_3 = new Topic();
-	    $topic2_3->setName('Third demo topic');
-	    $topic2_3->setDescription('This is the 3th topic in the 2nd forum');
-	    $topic2_3->setForum($forum2);
-	    $manager->persist($topic2_3);
-
-	    $manager->persist($forum2);
-
-        $manager->flush();
+	    $manager->flush();
     }
+
+	public function getDependencies(): array
+	{
+		return [
+			UserFixtures::class,
+		];
+	}
 }
