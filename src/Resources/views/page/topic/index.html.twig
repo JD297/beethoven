@@ -37,6 +37,10 @@
         </tbody>
     </table>
 
+    {% include '@Frontend/components/pagination.html.twig' with {
+        'routeParams': {'topicId': topic.id}
+    } %}
+
     {% if app.user %}
         {% for message in app.flashes('error') %}
             <div class="alert alert-danger">

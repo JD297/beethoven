@@ -3,7 +3,6 @@
 namespace Beethoven\Page\Topic;
 
 use Beethoven\Entity\Topic;
-use Beethoven\Event\Post\PostLoadedEvent;
 use Beethoven\Repository\TopicRepository;
 use Doctrine\Common\Collections\Criteria;
 use Doctrine\Common\Collections\Expr\Comparison;
