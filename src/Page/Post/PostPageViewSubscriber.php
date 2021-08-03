@@ -5,11 +5,8 @@ namespace Beethoven\Page\Post;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
-class PostPageSubscriber implements EventSubscriberInterface
+class PostPageViewSubscriber implements EventSubscriberInterface
 {
-	/**
-	 * @var EntityManagerInterface $entityManager
-	 */
 	private EntityManagerInterface $entityManager;
 
 	public function __construct(EntityManagerInterface $entityManager)
