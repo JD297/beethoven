@@ -1,0 +1,28 @@
+{% block pagination_component %}
+    {% set routeName = app.request.attributes.get('_route') %}
+    {% set pagination = page.custom.data.pagination.data %}
+
+    {% if pagination.end != 0 and pagination.end != 1 %}
+        <nav aria-label="Page navigation example">
+            <ul class="pagination">
+                <li class="page-item{% if pagination.current == pagination.start %} disabled{% endif %}">
+                    <a class="page-link" href="{{ url(routeName, routeParams|merge({'page': pagination.current - 1})) }}" aria-label="Previous">
+                        <span aria-hidden="true">&laquo;</span>
+                    </a>
+                </li>
+
+                {% for i in range(pagination.start, pagination.end) %}
+                    <li class="page-item{% if pagination.current == i %} active{% endif %}">
+                        <a class="page-link" href="{{ url(routeName, routeParams|merge({'page': i})) }}">{{ i }}</a>
+                    </li>
+                {% endfor %}
+
+                <li class="page-item{% if pagination.current == pagination.end %} disabled{% endif %}">
+                    <a class="page-link" href="{{ url(routeName, routeParams|merge({'page': pagination.current + 1})) }}" aria-label="Next">
+                        <span aria-hidden="true">&raquo;</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    {% endif %}
+{% endblock %}
