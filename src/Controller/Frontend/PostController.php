@@ -12,6 +12,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 class PostController extends AbstractController
 {
@@ -65,7 +66,11 @@ class PostController extends AbstractController
 			$entityManager->persist($comment);
 			$entityManager->flush();
 		} else {
-			$this->addFlash('error', 'Sorry, this comment can not be added.');
+			foreach ($form->getErrors(true) as $error) {
+				$this->addFlash(
+					'error', $error->getMessage()
+				);
+			}
 		}
 
 		return $this->redirectToRoute('frontend.post.index.page', [

@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Beethoven\Controller\Frontend;
 
@@ -73,6 +73,12 @@ class AuthController extends AbstractController
 				$formAuthenticator,
 				'main'
 			);
+		} else {
+			foreach ($form->getErrors(true) as $error) {
+				$this->addFlash(
+					'error', $error->getMessage()
+				);
+			}
 		}
 
 		return $this->render('page/auth/register.html.twig', [

@@ -7,9 +7,9 @@
             <small class="d-block">{{ topic.description }}</small>
         </td>
         <td>
-            <div>{{ 'frontend.generel.post.body-text'|trans({'%number%': topic.posts.count}) }}</div>
+            <div>{{ 'frontend.general.post.body-text'|trans({'%number%': topic.posts.count}) }}</div>
 
-            <div>{{ 'frontend.generel.contribution.body-text'|trans({'%number%': topic.contributionCount}) }}</div>
+            <div>{{ 'frontend.general.contribution.body-text'|trans({'%number%': topic.contributionCount}) }}</div>
         </td>
         <td>
             {% set lastContribution = topic.lastContribution %}

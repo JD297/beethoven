@@ -4,7 +4,7 @@ frontend:
         logout: 'Log Out'
         login: 'Log In'
         register: 'Sign Up'
-    generel:
+    general:
         statistic:
             header-text: 'Statistics'
         contribution:
@@ -30,6 +30,8 @@ frontend:
                         placeholder: 'Password'
                     button:
                         show: 'Login'
+                error:
+                    credentials: 'Wrong credentials!'
             register:
                 title: 'Sign Up'
                 input:
@@ -41,6 +43,16 @@ frontend:
                         placeholder: 'Password'
                     button:
                         show: 'Register'
+                error:
+                    username:
+                        blank: 'Please enter a username'
+                        min: 'Your username should be at least %limit% characters'
+                        max: 'Your username should be at max %limit% characters'
+                        unique: 'This username already exists'
+                    plainPassword:
+                        blank: 'Please enter a password'
+                        min: 'Your password should be at least %limit% characters'
+                        max: 'Your password should be at max %limit% characters'
         post:
             index:
                 user-timestamp: 'by %username% at %date%'
@@ -49,6 +61,9 @@ frontend:
                         placeholder: 'Write something...'
                     button:
                         show: 'Comment'
+            add-comment:
+                error:
+                    content: 'Comment could not be empty'
         topic:
             index:
                 input:
@@ -58,3 +73,7 @@ frontend:
                         placeholder: 'Write something...'
                     button:
                         show: 'Post'
+            add-post:
+                error:
+                    name: 'Title could not be empty'
+                    content: 'Post could not be empty'
