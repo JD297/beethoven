@@ -26,25 +26,29 @@
     } %}
 
     {% block frontend_post_index_page_comment_form %}
-        {% for message in app.flashes('error') %}
+        {% set errorFlashes = app.flashes('error') %}
+
+        {% if errorFlashes %}
             <div class="alert alert-danger">
-                {{ message }}
+                <ul>
+                    {% for message in errorFlashes %}
+                        <li>{{ message }}</li>
+                    {% endfor %}
+                </ul>
             </div>
-        {% endfor %}
+        {% endif %}
 
         {% if app.user %}
             {{ form_start(commentForm) }}
                 <div class="form-group">
                     {{ form_widget(commentForm.content, {'attr': {
-                        'class': 'form-control text-white bg-dark',
-                        'placeholder': 'frontend.page.post.index.input.comment.placeholder'|trans
+                        'class': 'form-control text-white bg-dark'
                     }}) }}
-                    {{ form_errors(commentForm.content) }}
                 </div>
 
                 {{ form_widget(commentForm.submit, {'attr': {
                     'class': 'btn btn-primary my-3'
-                }, 'label': 'frontend.page.post.index.input.button.show'|trans}) }}
+                }}) }}
             {{ form_end(commentForm) }}
         {% endif %}
     {% endblock %}

@@ -66,7 +66,11 @@ class TopicController extends AbstractController
 			$entityManager->persist($post);
 			$entityManager->flush();
 		} else {
-			$this->addFlash('error', 'Sorry, this post can not be added.');
+			foreach ($form->getErrors(true) as $error) {
+				$this->addFlash(
+					'error', $error->getMessage()
+				);
+			}
 		}
 
 		return $this->redirectToRoute('frontend.topic.index.page', [

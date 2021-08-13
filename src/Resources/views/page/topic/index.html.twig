@@ -8,9 +8,9 @@
     <table class="table table-hover table-striped table-dark text-center mt-4">
         <thead class="text-uppercase">
         <tr>
-            <th class="border-secondary w-50 text-start">{{ 'frontend.generel.post.header-text'|trans }}</th>
-            <th class="border-secondary w-25">{{ 'frontend.generel.statistic.header-text'|trans }}</th>
-            <th class="border-secondary w-25">{{ 'frontend.generel.contribution.header-text'|trans }}</th>
+            <th class="border-secondary w-50 text-start">{{ 'frontend.general.post.header-text'|trans }}</th>
+            <th class="border-secondary w-25">{{ 'frontend.general.statistic.header-text'|trans }}</th>
+            <th class="border-secondary w-25">{{ 'frontend.general.contribution.header-text'|trans }}</th>
         </tr>
         </thead>
         <tbody>
@@ -22,8 +22,8 @@
                     </strong>
                 </td>
                 <td>
-                    <div>{{ 'frontend.generel.post.answers'|trans({'%number%': post.comments.count}) }}</div>
-                    <div>{{ 'frontend.generel.post.views'|trans({'%number%': post.views}) }}</div>
+                    <div>{{ 'frontend.general.post.answers'|trans({'%number%': post.comments.count}) }}</div>
+                    <div>{{ 'frontend.general.post.views'|trans({'%number%': post.views}) }}</div>
                 </td>
                 <td>
                     {% set lastContribution = post.lastContribution %}
@@ -42,33 +42,34 @@
     } %}
 
     {% if app.user %}
-        {% for message in app.flashes('error') %}
+        {% set errorFlashes = app.flashes('error') %}
+
+        {% if errorFlashes %}
             <div class="alert alert-danger">
-                {{ message }}
+                <ul>
+                    {% for message in errorFlashes %}
+                        <li>{{ message }}</li>
+                    {% endfor %}
+                </ul>
             </div>
-        {% endfor %}
+        {% endif %}
 
         {{ form_start(postForm) }}
-        <div class="form-group my-3">
-            {{ form_widget(postForm.name, {'attr': {
-                'class': 'form-control text-white bg-dark',
-                'placeholder': 'frontend.page.topic.index.input.name.placeholder'|trans
-            }}) }}
-            {{ form_errors(postForm.content) }}
-        </div>
+            <div class="form-group my-3">
+                {{ form_widget(postForm.name, {'attr': {
+                    'class': 'form-control text-white bg-dark',
+                }}) }}
+            </div>
 
-        <div class="form-group my-3">
-            {{ form_widget(postForm.content, {'attr': {
-                'class': 'form-control text-white bg-dark',
-                'placeholder': 'frontend.page.topic.index.input.content.placeholder'|trans,
-                'rows': 5
-            }}) }}
-            {{ form_errors(postForm.content) }}
-        </div>
+            <div class="form-group my-3">
+                {{ form_widget(postForm.content, {'attr': {
+                    'class': 'form-control text-white bg-dark',
+                }}) }}
+            </div>
 
-        {{ form_widget(postForm.submit, {'attr': {
-            'class': 'btn btn-primary my-3'
-        }, 'label': 'frontend.page.topic.index.input.button.show'|trans}) }}
+            {{ form_widget(postForm.submit, {'attr': {
+                'class': 'btn btn-primary my-3'
+            }}) }}
         {{ form_end(postForm) }}
     {% endif %}
 {% endblock %}
