@@ -10,10 +10,10 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\TextareaField;
 
 class CommentCrudController extends AbstractCrudController
 {
-    public static function getEntityFqcn(): string
-    {
-        return Comment::class;
-    }
+	public static function getEntityFqcn(): string
+	{
+		return Comment::class;
+	}
 
 	public function configureFields(string $pageName): iterable
 	{
@@ -22,7 +22,7 @@ class CommentCrudController extends AbstractCrudController
 			BooleanField::new('active'),
 		];
 
-		if($pageName === 'new' || $pageName === 'edit') {
+		if ('new' === $pageName || 'edit' === $pageName) {
 			$fields[] = AssociationField::new('user');
 		}
 

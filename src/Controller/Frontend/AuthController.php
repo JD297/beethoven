@@ -3,8 +3,8 @@
 namespace Beethoven\Controller\Frontend;
 
 use Beethoven\Entity\User;
-use Beethoven\Page\Auth\Register\RegisterFormType;
 use Beethoven\Page\Auth\Login\LoginFormAuthenticator;
+use Beethoven\Page\Auth\Register\RegisterFormType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -15,21 +15,21 @@ use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
 class AuthController extends AbstractController
 {
-    /**
-     * @Route("/login", name="frontend.auth.login.page")
-     */
-    public function login(AuthenticationUtils $authenticationUtils): Response
-    {
+	/**
+	 * @Route("/login", name="frontend.auth.login.page")
+	 */
+	public function login(AuthenticationUtils $authenticationUtils): Response
+	{
 		if ($this->getUser()) {
 			return $this->redirectToRoute('frontend.home.index.page');
 		}
 
-        $error = $authenticationUtils->getLastAuthenticationError();
+		$error = $authenticationUtils->getLastAuthenticationError();
 
-        return $this->render('page/auth/login.html.twig', [
-			'error' => $error
+		return $this->render('page/auth/login.html.twig', [
+			'error' => $error,
 		]);
-    }
+	}
 
 	/**
 	 * @Route("/register", name="frontend.auth.register.page")
@@ -39,8 +39,7 @@ class AuthController extends AbstractController
 		UserPasswordEncoderInterface $passwordEncoder,
 		GuardAuthenticatorHandler $guardHandler,
 		LoginFormAuthenticator $formAuthenticator
-	): Response
-	{
+	): Response {
 		if ($this->getUser()) {
 			return $this->redirectToRoute('frontend.home.index.page');
 		}

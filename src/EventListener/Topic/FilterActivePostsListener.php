@@ -9,7 +9,7 @@ class FilterActivePostsListener
 {
 	public function postLoad(Topic $topic, LifecycleEventArgs $event): void
 	{
-		$posts = $topic->getPosts()->filter(function($post) {
+		$posts = $topic->getPosts()->filter(function ($post) {
 			return $post->getActive();
 		});
 

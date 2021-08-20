@@ -12,20 +12,18 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Contracts\Translation\TranslatorInterface;
 
 class PostController extends AbstractController
 {
 	private PostPageLoader $postPageLoader;
 
-	public function __construct(PostPageLoader $postPageLoader) {
+	public function __construct(PostPageLoader $postPageLoader)
+	{
 		$this->postPageLoader = $postPageLoader;
 	}
 
 	/**
 	 * @Route("/post/{postId}", name="frontend.post.index.page", requirements={"postId"="\d+"}, methods={"GET"})
-	 * @param int $postId
-	 * @return Response
 	 */
 	public function index(int $postId): Response
 	{
@@ -42,9 +40,6 @@ class PostController extends AbstractController
 	/**
 	 * @Route("/post/{postId}", name="frontend.post.add.comment", requirements={"postId"="\d+"}, methods={"POST"})
 	 * @ParamConverter("post", options={"id" = "postId"})
-	 * @param Post $post
-	 * @param Request $request
-	 * @return Response
 	 */
 	public function addComment(Post $post, Request $request): Response
 	{

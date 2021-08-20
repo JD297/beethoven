@@ -21,6 +21,7 @@ class ForumPage extends Page
 	public function setForum(Forum $forum): self
 	{
 		$this->data->set('forum', $forum);
+
 		return $this;
 	}
 }

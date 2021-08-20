@@ -38,7 +38,7 @@ class PostPageLoader
 		/** @var Post|bool $topic */
 		$topic = $this->postRepository->matching($criteria)->first();
 
-		if(!$topic instanceof Post) {
+		if (!$topic instanceof Post) {
 			throw new NotFoundHttpException();
 		}
 

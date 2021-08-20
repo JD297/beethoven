@@ -17,14 +17,13 @@ class TopicController extends AbstractController
 {
 	private TopicPageLoader $topicPageLoader;
 
-	public function __construct(TopicPageLoader $topicPageLoader) {
+	public function __construct(TopicPageLoader $topicPageLoader)
+	{
 		$this->topicPageLoader = $topicPageLoader;
 	}
 
 	/**
 	 * @Route("/topic/{topicId}", name="frontend.topic.index.page", requirements={"topicId"="\d+"}, methods={"GET"})
-	 * @param int $topicId
-	 * @return Response
 	 */
 	public function index(int $topicId): Response
 	{
@@ -41,9 +40,6 @@ class TopicController extends AbstractController
 	/**
 	 * @Route("/topic/{topicId}", name="frontend.topic.add.post", requirements={"topicId"="\d+"}, methods={"POST"})
 	 * @ParamConverter("topic", options={"id" = "topicId"})
-	 * @param Topic $topic
-	 * @param Request $request
-	 * @return Response
 	 */
 	public function addPost(Topic $topic, Request $request): Response
 	{
@@ -74,7 +70,7 @@ class TopicController extends AbstractController
 		}
 
 		return $this->redirectToRoute('frontend.topic.index.page', [
-			'topicId' => $topic->getId()
+			'topicId' => $topic->getId(),
 		]);
 	}
 }

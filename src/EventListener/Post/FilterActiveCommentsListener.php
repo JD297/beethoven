@@ -9,7 +9,7 @@ class FilterActiveCommentsListener
 {
 	public function postLoad(Post $post, LifecycleEventArgs $event): void
 	{
-		$comments = $post->getComments()->filter(function($comment) {
+		$comments = $post->getComments()->filter(function ($comment) {
 			return $comment->getActive();
 		});
 

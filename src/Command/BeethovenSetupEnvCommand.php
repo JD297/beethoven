@@ -10,7 +10,7 @@ use Symfony\Component\Filesystem\Filesystem;
 
 class BeethovenSetupEnvCommand extends Command
 {
-    protected static $defaultName = 'beethoven:setup-env';
+	protected static $defaultName = 'beethoven:setup-env';
 
 	protected const DESCRIPTION = 'Setup your .env.local file with required information.';
 	protected const ENV_KEY = 'APP_ENV';
@@ -26,43 +26,45 @@ class BeethovenSetupEnvCommand extends Command
 		;
 	}
 
-    protected function execute(InputInterface $input, OutputInterface $output): int
-    {
-	    $io = new SymfonyStyle($input, $output);
+	protected function execute(InputInterface $input, OutputInterface $output): int
+	{
+		$io = new SymfonyStyle($input, $output);
 
-	    $env = strtolower(
-		    $io->ask('Which environment do you want to setup (prod, dev)?', self::ENV_PROD)
-	    );
+		$env = strtolower(
+			$io->ask('Which environment do you want to setup (prod, dev)?', self::ENV_PROD)
+		);
 
-	    if($env !== self::ENV_DEV && $env !== self::ENV_PROD) {
-		    $io->error(sprintf('\'%s\' is not a valid environment!', $env));
-		    return Command::FAILURE;
-	    }
+		if (self::ENV_DEV !== $env && self::ENV_PROD !== $env) {
+			$io->error(sprintf('\'%s\' is not a valid environment!', $env));
 
-	    $dbDriver = $io->ask('db_driver', 'mysql');
-	    $dbUser = $io->ask('db_user', 'beethoven');
-	    $dbPassword = $io->askHidden('db_password');
-	    $dbHost = $io->ask('db_host', '127.0.0.1');
-	    $dbPort = $io->ask('db_port', '3306');
-	    $dbName = $io->ask('db_name', 'beethoven');
-	    $dbVersion = $io->ask('db_version', 'mariadb-10.3.27');
+			return Command::FAILURE;
+		}
 
-	    $connection = sprintf(
-		    '%s://%s:%s@%s:%s/%s?serverVersion=%s',
-		    $dbDriver, $dbUser, $dbPassword, $dbHost, $dbPort, $dbName, $dbVersion
-	    );
+		$dbDriver = $io->ask('db_driver', 'mysql');
+		$dbUser = $io->ask('db_user', 'beethoven');
+		$dbPassword = $io->askHidden('db_password');
+		$dbHost = $io->ask('db_host', '127.0.0.1');
+		$dbPort = $io->ask('db_port', '3306');
+		$dbName = $io->ask('db_name', 'beethoven');
+		$dbVersion = $io->ask('db_version', 'mariadb-10.3.27');
 
-	    $filesystem = new Filesystem();
-	    $filesystem->dumpFile(self::FILENAME, sprintf(
-		    "%s=%s\n",
-		    self::ENV_KEY, $env
-	    ));
-	    $filesystem->appendToFile(self::FILENAME, sprintf(
-		    "%s=%s\n",
-		    self::DB_KEY, $connection
-	    ));
+		$connection = sprintf(
+			'%s://%s:%s@%s:%s/%s?serverVersion=%s',
+			$dbDriver, $dbUser, $dbPassword, $dbHost, $dbPort, $dbName, $dbVersion
+		);
 
-        $io->success('Successfully created .env.local environment file.');
-        return Command::SUCCESS;
-    }
+		$filesystem = new Filesystem();
+		$filesystem->dumpFile(self::FILENAME, sprintf(
+			"%s=%s\n",
+			self::ENV_KEY, $env
+		));
+		$filesystem->appendToFile(self::FILENAME, sprintf(
+			"%s=%s\n",
+			self::DB_KEY, $connection
+		));
+
+		$io->success('Successfully created .env.local environment file.');
+
+		return Command::SUCCESS;
+	}
 }

@@ -11,7 +11,7 @@ abstract class Page
 	public function __construct()
 	{
 		$this->data = new ArrayStruct([
-			'custom' => new ArrayStruct()
+			'custom' => new ArrayStruct(),
 		]);
 	}
 

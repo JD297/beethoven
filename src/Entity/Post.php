@@ -12,221 +12,221 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Post
 {
-    /**
-     * @ORM\Id
-     * @ORM\GeneratedValue
-     * @ORM\Column(type="integer")
-     */
-    private $id;
+	/**
+	 * @ORM\Id
+	 * @ORM\GeneratedValue
+	 * @ORM\Column(type="integer")
+	 */
+	private $id;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $name;
+	/**
+	 * @ORM\Column(type="string", length=255)
+	 */
+	private $name;
 
-    /**
-     * @ORM\Column(type="string", length=65536)
-     */
-    private $content;
+	/**
+	 * @ORM\Column(type="string", length=65536)
+	 */
+	private $content;
 
-    /**
-     * @ORM\Column(type="integer")
-     */
-    private $views = 0;
+	/**
+	 * @ORM\Column(type="integer")
+	 */
+	private $views = 0;
 
-    /**
-     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="posts")
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $user;
+	/**
+	 * @ORM\ManyToOne(targetEntity=User::class, inversedBy="posts")
+	 * @ORM\JoinColumn(nullable=false)
+	 */
+	private $user;
 
-    /**
-     * @ORM\ManyToOne(targetEntity=Topic::class, inversedBy="posts")
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $topic;
+	/**
+	 * @ORM\ManyToOne(targetEntity=Topic::class, inversedBy="posts")
+	 * @ORM\JoinColumn(nullable=false)
+	 */
+	private $topic;
 
-    /**
-     * @ORM\OneToMany(targetEntity=Comment::class, mappedBy="post")
-     */
-    private $comments;
+	/**
+	 * @ORM\OneToMany(targetEntity=Comment::class, mappedBy="post")
+	 */
+	private $comments;
 
-    /**
-     * @ORM\Column(type="datetime")
-     */
-    private $createdAt;
+	/**
+	 * @ORM\Column(type="datetime")
+	 */
+	private $createdAt;
 
-    /**
-     * @ORM\Column(type="datetime", nullable=true)
-     */
-    private $updatedAt;
+	/**
+	 * @ORM\Column(type="datetime", nullable=true)
+	 */
+	private $updatedAt;
 
-    /**
-     * @ORM\Column(type="boolean")
-     */
-    private $active = true;
+	/**
+	 * @ORM\Column(type="boolean")
+	 */
+	private $active = true;
 
 	/**
 	 * @var Comment|null
 	 */
-    private $lastContribution;
+	private $lastContribution;
 
-    public function __construct()
-    {
-        $this->comments = new ArrayCollection();
-        $this->createdAt = new \DateTime();
-    }
+	public function __construct()
+	{
+		$this->comments = new ArrayCollection();
+		$this->createdAt = new \DateTime();
+	}
 
-    public function getId(): ?int
-    {
-        return $this->id;
-    }
+	public function getId(): ?int
+	{
+		return $this->id;
+	}
 
-    public function getName(): ?string
-    {
-        return $this->name;
-    }
+	public function getName(): ?string
+	{
+		return $this->name;
+	}
 
-    public function setName(string $name): self
-    {
-        $this->name = $name;
+	public function setName(string $name): self
+	{
+		$this->name = $name;
 
-        return $this;
-    }
+		return $this;
+	}
 
-    public function getContent(): ?string
-    {
-        return $this->content;
-    }
+	public function getContent(): ?string
+	{
+		return $this->content;
+	}
 
-    public function setContent(string $content): self
-    {
-        $this->content = $content;
+	public function setContent(string $content): self
+	{
+		$this->content = $content;
 
-        return $this;
-    }
+		return $this;
+	}
 
-    public function getViews(): ?int
-    {
-        return $this->views;
-    }
+	public function getViews(): ?int
+	{
+		return $this->views;
+	}
 
-    public function addView(): self
-    {
-        $this->views += 1;
+	public function addView(): self
+	{
+		++$this->views;
 
-        return $this;
-    }
+		return $this;
+	}
 
-    public function getUser(): ?User
-    {
-        return $this->user;
-    }
+	public function getUser(): ?User
+	{
+		return $this->user;
+	}
 
-    public function setUser(?User $user): self
-    {
-        $this->user = $user;
+	public function setUser(?User $user): self
+	{
+		$this->user = $user;
 
-        return $this;
-    }
+		return $this;
+	}
 
-    public function getTopic(): ?Topic
-    {
-        return $this->topic;
-    }
+	public function getTopic(): ?Topic
+	{
+		return $this->topic;
+	}
 
-    public function setTopic(?Topic $topic): self
-    {
-        $this->topic = $topic;
+	public function setTopic(?Topic $topic): self
+	{
+		$this->topic = $topic;
 
-        return $this;
-    }
-
-    /**
-     * @return Collection|Comment[]
-     */
-    public function getComments(): Collection
-    {
-        return $this->comments;
-    }
+		return $this;
+	}
 
 	/**
-	 * @var Collection|Comment[] $comments
+	 * @return Collection|Comment[]
 	 */
-    public function setComments(Collection $comments): self
-    {
+	public function getComments(): Collection
+	{
+		return $this->comments;
+	}
+
+	/**
+	 * @var Collection|Comment[]
+	 */
+	public function setComments(Collection $comments): self
+	{
 		$this->comments = $comments;
 
 		return $this;
-    }
+	}
 
-    public function addComment(Comment $comment): self
-    {
-        if (!$this->comments->contains($comment)) {
-            $this->comments[] = $comment;
-            $comment->setPosts($this);
-        }
+	public function addComment(Comment $comment): self
+	{
+		if (!$this->comments->contains($comment)) {
+			$this->comments[] = $comment;
+			$comment->setPosts($this);
+		}
 
-        return $this;
-    }
+		return $this;
+	}
 
-    public function removeComment(Comment $comment): self
-    {
-        if ($this->comments->removeElement($comment)) {
-            // set the owning side to null (unless already changed)
-            if ($comment->getPosts() === $this) {
-                $comment->setPosts(null);
-            }
-        }
+	public function removeComment(Comment $comment): self
+	{
+		if ($this->comments->removeElement($comment)) {
+			// set the owning side to null (unless already changed)
+			if ($comment->getPosts() === $this) {
+				$comment->setPosts(null);
+			}
+		}
 
-        return $this;
-    }
+		return $this;
+	}
 
-    public function getCreatedAt(): ?\DateTimeInterface
-    {
-        return $this->createdAt;
-    }
+	public function getCreatedAt(): ?\DateTimeInterface
+	{
+		return $this->createdAt;
+	}
 
-    public function setCreatedAt(\DateTimeInterface $createdAt): self
-    {
-        $this->createdAt = $createdAt;
+	public function setCreatedAt(\DateTimeInterface $createdAt): self
+	{
+		$this->createdAt = $createdAt;
 
-        return $this;
-    }
+		return $this;
+	}
 
-    public function getUpdatedAt(): ?\DateTimeInterface
-    {
-        return $this->updatedAt;
-    }
+	public function getUpdatedAt(): ?\DateTimeInterface
+	{
+		return $this->updatedAt;
+	}
 
-    public function setUpdatedAt(?\DateTimeInterface $updatedAt): self
-    {
-        $this->updatedAt = $updatedAt;
+	public function setUpdatedAt(?\DateTimeInterface $updatedAt): self
+	{
+		$this->updatedAt = $updatedAt;
 
-        return $this;
-    }
+		return $this;
+	}
 
-    public function getActive(): ?bool
-    {
-        return $this->active;
-    }
+	public function getActive(): ?bool
+	{
+		return $this->active;
+	}
 
-    public function setActive(bool $active): self
-    {
-        $this->active = $active;
+	public function setActive(bool $active): self
+	{
+		$this->active = $active;
 
-        return $this;
-    }
+		return $this;
+	}
 
-    public function getLastContribution(): ?Comment
-    {
+	public function getLastContribution(): ?Comment
+	{
 		return $this->lastContribution;
-    }
+	}
 
-    public function setLastContribution(Comment $comment): self
-    {
+	public function setLastContribution(Comment $comment): self
+	{
 		$this->lastContribution = $comment;
 
 		return $this;
-    }
+	}
 }

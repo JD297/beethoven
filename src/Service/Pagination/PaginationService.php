@@ -30,25 +30,24 @@ class PaginationService implements PaginationServiceInterface
 			$collection->slice($this->getOffset(), self::PAGINATION_LENGTH)
 		);
 
-		if(!$arrayCollection->count() && $this->getOffset() != 0) {
+		if (!$arrayCollection->count() && 0 != $this->getOffset()) {
 			throw new NotFoundHttpException();
 		}
 
 		return $arrayCollection;
 	}
 
-
 	private function setPaginationData(Page $page, int $maxOffset): void
 	{
 		$current = $this->getOffset() / self::PAGINATION_LENGTH + 1;
 
 		$start = $current - self::PAGINATION_DISTANCE;
-		if($start < 1) {
+		if ($start < 1) {
 			$start = 1;
 		}
 
 		$end = $current + self::PAGINATION_DISTANCE;
-		if($end > $maxOffset) {
+		if ($end > $maxOffset) {
 			$end = $maxOffset;
 		}
 
@@ -67,7 +66,7 @@ class PaginationService implements PaginationServiceInterface
 		$offset = intval(($offset - 1) * self::PAGINATION_LENGTH);
 
 		// first page is fallback
-		if($offset < 0) {
+		if ($offset < 0) {
 			$offset = 0;
 		}
 

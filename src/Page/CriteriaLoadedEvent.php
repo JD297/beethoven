@@ -14,21 +14,18 @@ abstract class CriteriaLoadedEvent extends Event
 		$this->criteria = $criteria;
 	}
 
-	/**
-	 * @return Criteria
-	 */
 	public function getCriteria(): Criteria
 	{
 		return $this->criteria;
 	}
 
 	/**
-	 * @param Criteria $criteria
 	 * @return CriteriaLoadedEvent
 	 */
 	public function setCriteria(Criteria $criteria): self
 	{
 		$this->criteria = $criteria;
+
 		return $this;
 	}
 }

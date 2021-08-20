@@ -38,7 +38,7 @@ class TopicPageLoader
 		/** @var Topic|bool $topic */
 		$topic = $this->topicRepository->matching($criteria)->first();
 
-		if(!$topic instanceof Topic) {
+		if (!$topic instanceof Topic) {
 			throw new NotFoundHttpException();
 		}
 

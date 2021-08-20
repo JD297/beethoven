@@ -12,44 +12,38 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class BeethovenCreateUserCommand extends Command
 {
-    protected static $defaultName = 'beethoven:create-user';
-    protected const DESCRIPTION = 'Create a user';
+	protected static $defaultName = 'beethoven:create-user';
+	protected const DESCRIPTION = 'Create a user';
 
-	/**
-	 * @var UserPasswordEncoderInterface $passwordEncoder
-	 */
 	private UserPasswordEncoderInterface $passwordEncoder;
 
-	/**
-	 * @var EntityManagerInterface $em
-	 */
 	private EntityManagerInterface $em;
 
-    public function __construct(EntityManagerInterface $em, UserPasswordEncoderInterface $passwordEncoder, string $name = null)
-    {
-	    parent::__construct($name);
+	public function __construct(EntityManagerInterface $em, UserPasswordEncoderInterface $passwordEncoder, string $name = null)
+	{
+		parent::__construct($name);
 
-	    $this->em = $em;
-	    $this->passwordEncoder = $passwordEncoder;
-    }
+		$this->em = $em;
+		$this->passwordEncoder = $passwordEncoder;
+	}
 
 	protected function configure(): void
-    {
-        $this
-            ->setDescription(self::DESCRIPTION)
-        ;
-    }
+	{
+		$this
+			->setDescription(self::DESCRIPTION)
+		;
+	}
 
-    protected function execute(InputInterface $input, OutputInterface $output): int
-    {
-        $io = new SymfonyStyle($input, $output);
+	protected function execute(InputInterface $input, OutputInterface $output): int
+	{
+		$io = new SymfonyStyle($input, $output);
 
-        $username = $io->ask('Username');
-        $password = $io->askHidden('Password');
+		$username = $io->ask('Username');
+		$password = $io->askHidden('Password');
 
-        $roles = [];
+		$roles = [];
 
-		while(true) {
+		while (true) {
 			$role = $io->ask('Add role e.g. ROLE_ADMIN (LEAVE EMPTY AND PRESS ENTER to continue)');
 
 			if (!$role) {
@@ -61,7 +55,7 @@ class BeethovenCreateUserCommand extends Command
 
 		$roles = array_unique($roles);
 
-	    $user = new User();
+		$user = new User();
 		$user
 			->setUsername($username)
 			->setPassword($this->passwordEncoder->encodePassword(
@@ -74,7 +68,8 @@ class BeethovenCreateUserCommand extends Command
 		$this->em->persist($user);
 		$this->em->flush();
 
-        $io->success(sprintf('User %s was successfully created.', $user->getUsername()));
-        return Command::SUCCESS;
-    }
+		$io->success(sprintf('User %s was successfully created.', $user->getUsername()));
+
+		return Command::SUCCESS;
+	}
 }

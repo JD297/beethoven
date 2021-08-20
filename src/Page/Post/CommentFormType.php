@@ -30,12 +30,12 @@ class CommentFormType extends AbstractType
 			->add('content', TextareaType::class, [
 				'constraints' => [
 					new NotBlank([
-						'message' => $this->translator->trans('frontend.page.post.add-comment.error.content', [], "messages"),
+						'message' => $this->translator->trans('frontend.page.post.add-comment.error.content', [], 'messages'),
 					]),
 				],
 				'attr' => [
 					'placeholder' => 'frontend.page.post.index.input.comment.placeholder',
-				]
+				],
 			])
 			->add('submit', SubmitType::class, [
 				'label' => 'frontend.page.post.index.input.button.show',

@@ -11,10 +11,10 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 
 class PostCrudController extends AbstractCrudController
 {
-    public static function getEntityFqcn(): string
-    {
-        return Post::class;
-    }
+	public static function getEntityFqcn(): string
+	{
+		return Post::class;
+	}
 
 	public function configureFields(string $pageName): iterable
 	{
@@ -24,7 +24,7 @@ class PostCrudController extends AbstractCrudController
 			BooleanField::new('active'),
 		];
 
-		if($pageName === 'new' || $pageName === 'edit') {
+		if ('new' === $pageName || 'edit' === $pageName) {
 			$fields[] = AssociationField::new('topic');
 			$fields[] = AssociationField::new('user');
 		}

@@ -12,7 +12,7 @@ class SetLastContributionListener
 	{
 		$lastComment = $post->getComments()->last();
 
-		if($lastComment instanceof Comment) {
+		if ($lastComment instanceof Comment) {
 			$post->setLastContribution($lastComment);
 		}
 	}

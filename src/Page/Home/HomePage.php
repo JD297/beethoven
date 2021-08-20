@@ -21,6 +21,7 @@ class HomePage extends Page
 	public function setForumCollection(LazyCriteriaCollection $forumCollection): self
 	{
 		$this->data->set('forumCollection', $forumCollection);
+
 		return $this;
 	}
 }

@@ -21,6 +21,7 @@ class PostPage extends Page
 	public function setPost(Post $post): self
 	{
 		$this->data->set('post', $post);
+
 		return $this;
 	}
 }

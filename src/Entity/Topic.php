@@ -12,38 +12,38 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Topic
 {
-    /**
-     * @ORM\Id
-     * @ORM\GeneratedValue
-     * @ORM\Column(type="integer")
-     */
-    private $id;
+	/**
+	 * @ORM\Id
+	 * @ORM\GeneratedValue
+	 * @ORM\Column(type="integer")
+	 */
+	private $id;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $name;
+	/**
+	 * @ORM\Column(type="string", length=255)
+	 */
+	private $name;
 
-    /**
-     * @ORM\Column(type="string", length=512, nullable=true)
-     */
-    private $description;
+	/**
+	 * @ORM\Column(type="string", length=512, nullable=true)
+	 */
+	private $description;
 
-    /**
-     * @ORM\ManyToOne(targetEntity=Forum::class, inversedBy="topics")
-     * @ORM\JoinColumn(nullable=true)
-     */
-    private $forum;
+	/**
+	 * @ORM\ManyToOne(targetEntity=Forum::class, inversedBy="topics")
+	 * @ORM\JoinColumn(nullable=true)
+	 */
+	private $forum;
 
-    /**
-     * @ORM\OneToMany(targetEntity=Post::class, mappedBy="topic")
-     */
-    private $posts;
+	/**
+	 * @ORM\OneToMany(targetEntity=Post::class, mappedBy="topic")
+	 */
+	private $posts;
 
-    /**
-     * @ORM\Column(type="boolean")
-     */
-    private $active = true;
+	/**
+	 * @ORM\Column(type="boolean")
+	 */
+	private $active = true;
 
 	/**
 	 * @var Comment|null
@@ -55,74 +55,74 @@ class Topic
 	 */
 	private $contributionCount = 0;
 
-    public function __construct()
-    {
-        $this->posts = new ArrayCollection();
-    }
+	public function __construct()
+	{
+		$this->posts = new ArrayCollection();
+	}
 
-    public function __toString(): string
-    {
-	    return $this->getName();
-    }
+	public function __toString(): string
+	{
+		return $this->getName();
+	}
 
 	public function getId(): ?int
-    {
-        return $this->id;
-    }
+	{
+		return $this->id;
+	}
 
-    public function getName(): ?string
-    {
-        return $this->name;
-    }
+	public function getName(): ?string
+	{
+		return $this->name;
+	}
 
-    public function setName(string $name): self
-    {
-        $this->name = $name;
+	public function setName(string $name): self
+	{
+		$this->name = $name;
 
-        return $this;
-    }
+		return $this;
+	}
 
-    public function getDescription(): ?string
-    {
-        return $this->description;
-    }
+	public function getDescription(): ?string
+	{
+		return $this->description;
+	}
 
-    public function setDescription(?string $description): self
-    {
-        $this->description = $description;
+	public function setDescription(?string $description): self
+	{
+		$this->description = $description;
 
-        return $this;
-    }
+		return $this;
+	}
 
-    public function getForum(): ?Forum
-    {
-        return $this->forum;
-    }
+	public function getForum(): ?Forum
+	{
+		return $this->forum;
+	}
 
-    public function setForum(?Forum $forum): self
-    {
-        $this->forum = $forum;
+	public function setForum(?Forum $forum): self
+	{
+		$this->forum = $forum;
 
-        return $this;
-    }
+		return $this;
+	}
 
-    /**
-     * @return Collection|Post[]
-     */
-    public function getPosts(): Collection
-    {
-        return $this->posts;
-    }
+	/**
+	 * @return Collection|Post[]
+	 */
+	public function getPosts(): Collection
+	{
+		return $this->posts;
+	}
 
-    public function addPost(Post $post): self
-    {
-        if (!$this->posts->contains($post)) {
-            $this->posts[] = $post;
-            $post->setTopic($this);
-        }
+	public function addPost(Post $post): self
+	{
+		if (!$this->posts->contains($post)) {
+			$this->posts[] = $post;
+			$post->setTopic($this);
+		}
 
-        return $this;
-    }
+		return $this;
+	}
 
 	/**
 	 * @param Collection|Post[] $posts
@@ -134,29 +134,29 @@ class Topic
 		return $this;
 	}
 
-    public function removePost(Post $post): self
-    {
-        if ($this->posts->removeElement($post)) {
-            // set the owning side to null (unless already changed)
-            if ($post->getTopic() === $this) {
-                $post->setTopic(null);
-            }
-        }
+	public function removePost(Post $post): self
+	{
+		if ($this->posts->removeElement($post)) {
+			// set the owning side to null (unless already changed)
+			if ($post->getTopic() === $this) {
+				$post->setTopic(null);
+			}
+		}
 
-        return $this;
-    }
+		return $this;
+	}
 
-    public function getActive(): ?bool
-    {
-        return $this->active;
-    }
+	public function getActive(): ?bool
+	{
+		return $this->active;
+	}
 
-    public function setActive(bool $active): self
-    {
-        $this->active = $active;
+	public function setActive(bool $active): self
+	{
+		$this->active = $active;
 
-        return $this;
-    }
+		return $this;
+	}
 
 	public function getLastContribution(): ?Comment
 	{

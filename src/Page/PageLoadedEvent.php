@@ -13,21 +13,18 @@ abstract class PageLoadedEvent extends Event
 		$this->page = $page;
 	}
 
-	/**
-	 * @return Page
-	 */
 	public function getPage(): Page
 	{
 		return $this->page;
 	}
 
 	/**
-	 * @param Page $page
 	 * @return PageLoadedEvent
 	 */
 	public function setPage(Page $page): self
 	{
 		$this->page = $page;
+
 		return $this;
 	}
 }

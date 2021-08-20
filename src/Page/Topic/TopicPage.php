@@ -21,6 +21,7 @@ class TopicPage extends Page
 	public function setTopic(Topic $topic): self
 	{
 		$this->data->set('topic', $topic);
+
 		return $this;
 	}
 }

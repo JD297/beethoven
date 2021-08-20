@@ -9,10 +9,10 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 
 class UserCrudController extends AbstractCrudController
 {
-    public static function getEntityFqcn(): string
-    {
-        return User::class;
-    }
+	public static function getEntityFqcn(): string
+	{
+		return User::class;
+	}
 
 	public function configureFields(string $pageName): iterable
 	{
@@ -21,7 +21,7 @@ class UserCrudController extends AbstractCrudController
 			ArrayField::new('roles'),
 		];
 
-		if($pageName === 'new' || $pageName === 'edit') {
+		if ('new' === $pageName || 'edit' === $pageName) {
 			$fields[] = TextField::new('password', 'Password (hashed)')
 				->setHelp('Use: bin/console security:encode-password [plain password]');
 		}

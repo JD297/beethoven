@@ -9,7 +9,7 @@ class SetLastContributionCountListener
 {
 	public function postLoad(Topic $topic, LifecycleEventArgs $event): void
 	{
-		foreach($topic->getPosts() as $post) {
+		foreach ($topic->getPosts() as $post) {
 			$topic->setContributionCount(
 				$topic->getContributionCount() + $post->getComments()->count()
 			);

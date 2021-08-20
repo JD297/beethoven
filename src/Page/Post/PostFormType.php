@@ -13,7 +13,7 @@ use Symfony\Component\Validator\Constraints\NotBlank;
 
 class PostFormType extends AbstractType
 {
-	const CONTENT_ROWS = 5;
+	public const CONTENT_ROWS = 5;
 
 	/*
 	 * TODO
@@ -26,7 +26,7 @@ class PostFormType extends AbstractType
 				'constraints' => [
 					new NotBlank([
 						'message' => 'Title could not be empty',
-					])
+					]),
 				],
 				'attr' => [
 					'placeholder' => 'frontend.page.topic.index.input.name.placeholder',
@@ -36,7 +36,7 @@ class PostFormType extends AbstractType
 				'constraints' => [
 					new NotBlank([
 						'message' => 'Post could not be empty',
-					])
+					]),
 				],
 				'attr' => [
 					'placeholder' => 'frontend.page.topic.index.input.content.placeholder',

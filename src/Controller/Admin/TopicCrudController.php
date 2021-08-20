@@ -10,23 +10,23 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 
 class TopicCrudController extends AbstractCrudController
 {
-    public static function getEntityFqcn(): string
-    {
-        return Topic::class;
-    }
+	public static function getEntityFqcn(): string
+	{
+		return Topic::class;
+	}
 
-    public function configureFields(string $pageName): iterable
-    {
-    	$fields = [
-		    TextField::new('name'),
-		    TextField::new('description'),
-		    BooleanField::new('active'),
-	    ];
+	public function configureFields(string $pageName): iterable
+	{
+		$fields = [
+			TextField::new('name'),
+			TextField::new('description'),
+			BooleanField::new('active'),
+		];
 
-    	if($pageName === 'new' || $pageName === 'edit') {
+		if ('new' === $pageName || 'edit' === $pageName) {
 			$fields[] = AssociationField::new('forum');
-	    }
+		}
 
-	    return $fields;
-    }
+		return $fields;
+	}
 }

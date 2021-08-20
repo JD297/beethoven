@@ -3,8 +3,6 @@
 namespace Beethoven\Page\Forum;
 
 use Beethoven\Entity\Forum;
-use Beethoven\Event\Post\PostLoadedEvent;
-use Beethoven\Event\Topic\TopicLoadedEvent;
 use Beethoven\Repository\ForumRepository;
 use Doctrine\Common\Collections\Criteria;
 use Doctrine\Common\Collections\Expr\Comparison;
@@ -40,7 +38,7 @@ class ForumPageLoader
 		/** @var Forum|bool $forum */
 		$forum = $this->forumRepository->matching($criteria)->first();
 
-		if(!$forum instanceof Forum) {
+		if (!$forum instanceof Forum) {
 			throw new NotFoundHttpException();
 		}
 

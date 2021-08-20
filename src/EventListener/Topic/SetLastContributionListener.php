@@ -12,7 +12,7 @@ class SetLastContributionListener
 	{
 		$iteratorPosts = $topic->getPosts()->getIterator();
 
-		if($iteratorPosts->count() === 0) {
+		if (0 === $iteratorPosts->count()) {
 			return;
 		}
 
@@ -23,7 +23,7 @@ class SetLastContributionListener
 
 		$lastContribution = $iteratorPosts->current()->getLastcontribution();
 
-		if($lastContribution instanceof Comment) {
+		if ($lastContribution instanceof Comment) {
 			$topic->setLastContribution($lastContribution);
 		}
 	}

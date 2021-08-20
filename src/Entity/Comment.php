@@ -10,124 +10,124 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Comment
 {
-    /**
-     * @ORM\Id
-     * @ORM\GeneratedValue
-     * @ORM\Column(type="integer")
-     */
-    private $id;
+	/**
+	 * @ORM\Id
+	 * @ORM\GeneratedValue
+	 * @ORM\Column(type="integer")
+	 */
+	private $id;
 
-    /**
-     * @ORM\Column(type="string", length=65536)
-     */
-    private $content;
+	/**
+	 * @ORM\Column(type="string", length=65536)
+	 */
+	private $content;
 
-    /**
-     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="comments")
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $user;
+	/**
+	 * @ORM\ManyToOne(targetEntity=User::class, inversedBy="comments")
+	 * @ORM\JoinColumn(nullable=false)
+	 */
+	private $user;
 
-    /**
-     * @ORM\Column(type="datetime")
-     */
-    private $createdAt;
+	/**
+	 * @ORM\Column(type="datetime")
+	 */
+	private $createdAt;
 
-    /**
-     * @ORM\Column(type="datetime", nullable=true)
-     */
-    private $updatedAt;
+	/**
+	 * @ORM\Column(type="datetime", nullable=true)
+	 */
+	private $updatedAt;
 
-    /**
-     * @ORM\ManyToOne(targetEntity=Post::class, inversedBy="comments")
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $post;
+	/**
+	 * @ORM\ManyToOne(targetEntity=Post::class, inversedBy="comments")
+	 * @ORM\JoinColumn(nullable=false)
+	 */
+	private $post;
 
-    /**
-     * @ORM\Column(type="boolean")
-     */
-    private $active = true;
+	/**
+	 * @ORM\Column(type="boolean")
+	 */
+	private $active = true;
 
-    public function __construct()
-    {
-	    $this->createdAt = new \DateTime();
-    }
+	public function __construct()
+	{
+		$this->createdAt = new \DateTime();
+	}
 
 	public function getId(): ?int
-             {
-                 return $this->id;
-             }
+	{
+		return $this->id;
+	}
 
-    public function getContent(): ?string
-    {
-        return $this->content;
-    }
+	public function getContent(): ?string
+	{
+		return $this->content;
+	}
 
-    public function setContent(string $content): self
-    {
-        $this->content = $content;
+	public function setContent(string $content): self
+	{
+		$this->content = $content;
 
-        return $this;
-    }
+		return $this;
+	}
 
-    public function getUser(): ?User
-    {
-        return $this->user;
-    }
+	public function getUser(): ?User
+	{
+		return $this->user;
+	}
 
-    public function setUser(?User $user): self
-    {
-        $this->user = $user;
+	public function setUser(?User $user): self
+	{
+		$this->user = $user;
 
-        return $this;
-    }
+		return $this;
+	}
 
-    public function getCreatedAt(): ?\DateTimeInterface
-    {
-        return $this->createdAt;
-    }
+	public function getCreatedAt(): ?\DateTimeInterface
+	{
+		return $this->createdAt;
+	}
 
-    public function setCreatedAt(\DateTimeInterface $createdAt): self
-    {
-        $this->createdAt = $createdAt;
+	public function setCreatedAt(\DateTimeInterface $createdAt): self
+	{
+		$this->createdAt = $createdAt;
 
-        return $this;
-    }
+		return $this;
+	}
 
-    public function getUpdatedAt(): ?\DateTimeInterface
-    {
-        return $this->updatedAt;
-    }
+	public function getUpdatedAt(): ?\DateTimeInterface
+	{
+		return $this->updatedAt;
+	}
 
-    public function setUpdatedAt(?\DateTimeInterface $updatedAt): self
-    {
-        $this->updatedAt = $updatedAt;
+	public function setUpdatedAt(?\DateTimeInterface $updatedAt): self
+	{
+		$this->updatedAt = $updatedAt;
 
-        return $this;
-    }
+		return $this;
+	}
 
-    public function getPost(): ?Post
-    {
-        return $this->post;
-    }
+	public function getPost(): ?Post
+	{
+		return $this->post;
+	}
 
-    public function setPost(?Post $post): self
-    {
-        $this->post = $post;
+	public function setPost(?Post $post): self
+	{
+		$this->post = $post;
 
-        return $this;
-    }
+		return $this;
+	}
 
-    public function getActive(): ?bool
-    {
-        return $this->active;
-    }
+	public function getActive(): ?bool
+	{
+		return $this->active;
+	}
 
-    public function setActive(bool $active): self
-    {
-        $this->active = $active;
+	public function setActive(bool $active): self
+	{
+		$this->active = $active;
 
-        return $this;
-    }
+		return $this;
+	}
 }
