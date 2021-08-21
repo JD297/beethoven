@@ -1,5 +1,5 @@
 security:
-    encoders:
+    password_hashers:
         Beethoven\Entity\User:
             algorithm: auto
     enable_authenticator_manager: true
@@ -15,9 +15,8 @@ security:
         main:
             lazy: true
             provider: app_user_provider
-            guard:
-                authenticators:
-                    - Beethoven\Page\Auth\Login\LoginFormAuthenticator
+            custom_authenticators:
+                - Beethoven\Page\Auth\Login\LoginFormAuthenticator
             logout:
                 path: frontend.auth.logout.page
                 target: frontend.home.index.page

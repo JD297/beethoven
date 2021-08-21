@@ -5,16 +5,16 @@ namespace Beethoven\DataFixtures;
 use Beethoven\Entity\User;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
-use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 class UserFixtures extends Fixture
 {
 	public const ADMIN_USER_REFERENCE = 'admin-user';
 	public const DEMO_USER_REFERENCE = 'demo-user';
 
-	private UserPasswordEncoderInterface $passwordEncoder;
+	private UserPasswordHasherInterface $passwordEncoder;
 
-	public function __construct(UserPasswordEncoderInterface $passwordEncoder)
+	public function __construct(UserPasswordHasherInterface $passwordEncoder)
 	{
 		$this->passwordEncoder = $passwordEncoder;
 	}
@@ -25,7 +25,7 @@ class UserFixtures extends Fixture
 		$userDemo
 			->setUsername('demo')
 			->setPassword(
-				$this->passwordEncoder->encodePassword(
+				$this->passwordEncoder->hashPassword(
 					$userDemo,
 					'demo'
 				));

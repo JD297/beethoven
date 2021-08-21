@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Beethoven\Entity;
 
@@ -6,12 +6,13 @@ use Beethoven\Repository\UserRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * @ORM\Entity(repositoryClass=UserRepository::class)
  */
-class User implements UserInterface
+class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
 	/**
 	 * @ORM\Id
@@ -60,6 +61,14 @@ class User implements UserInterface
 	public function getId(): ?int
 	{
 		return $this->id;
+	}
+
+	/**
+	 * @see UserInterface
+	 */
+	public function getUserIdentifier(): string
+	{
+		return (string) $this->username;
 	}
 
 	/**

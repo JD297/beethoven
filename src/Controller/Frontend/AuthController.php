@@ -8,10 +8,10 @@ use Beethoven\Page\Auth\Register\RegisterFormType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
-use Symfony\Component\Security\Guard\GuardAuthenticatorHandler;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
+use Symfony\Component\Security\Http\Authentication\UserAuthenticatorInterface;
 
 class AuthController extends AbstractController
 {
@@ -36,26 +36,24 @@ class AuthController extends AbstractController
 	 */
 	public function register(
 		Request $request,
-		UserPasswordEncoderInterface $passwordEncoder,
-		GuardAuthenticatorHandler $guardHandler,
+		UserPasswordHasherInterface $passwordEncoder,
+		UserAuthenticatorInterface $authenticator,
 		LoginFormAuthenticator $formAuthenticator
 	): Response {
 		if ($this->getUser()) {
 			return $this->redirectToRoute('frontend.home.index.page');
 		}
 
-		$user = new User();
-
 		$form = $this->createForm(RegisterFormType::class);
 		$form->handleRequest($request);
 
-		if ($form->isSubmitted() && $form->isValid()) {
-			$user->setUsername(
-				$form->get('username')->getData()
-			);
+		$csrfToken = $request->request->get('_csrf_token');
 
+		if ($form->isSubmitted() && $form->isValid() && $this->isCsrfTokenValid('register', $csrfToken)) {
+			/** @var User $user */
+			$user = $form->getData();
 			$user->setPassword(
-				$passwordEncoder->encodePassword(
+				$passwordEncoder->hashPassword(
 					$user,
 					$form->get('plainPassword')->getData()
 				)
@@ -65,12 +63,10 @@ class AuthController extends AbstractController
 			$entityManager->persist($user);
 			$entityManager->flush();
 
-			// login after registration
-			return $guardHandler->authenticateUserAndHandleSuccess(
+			return $authenticator->authenticateUser(
 				$user,
-				$request,
 				$formAuthenticator,
-				'main'
+				$request
 			);
 		} else {
 			foreach ($form->getErrors(true) as $error) {

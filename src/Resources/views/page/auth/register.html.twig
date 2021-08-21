@@ -34,5 +34,7 @@
                 'class': 'btn btn-primary',
             }}) }}
         </div>
+
+        <input type="hidden" name="_csrf_token" value="{{ csrf_token('register') }}">
     {{ form_end(form) }}
 {% endblock %}

@@ -8,18 +8,18 @@ use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
-use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 class BeethovenCreateUserCommand extends Command
 {
 	protected static $defaultName = 'beethoven:create-user';
 	protected const DESCRIPTION = 'Create a user';
 
-	private UserPasswordEncoderInterface $passwordEncoder;
+	private UserPasswordHasherInterface $passwordEncoder;
 
 	private EntityManagerInterface $em;
 
-	public function __construct(EntityManagerInterface $em, UserPasswordEncoderInterface $passwordEncoder, string $name = null)
+	public function __construct(EntityManagerInterface $em, UserPasswordHasherInterface $passwordEncoder, string $name = null)
 	{
 		parent::__construct($name);
 
@@ -58,7 +58,7 @@ class BeethovenCreateUserCommand extends Command
 		$user = new User();
 		$user
 			->setUsername($username)
-			->setPassword($this->passwordEncoder->encodePassword(
+			->setPassword($this->passwordEncoder->hashPassword(
 				$user,
 				$password
 			))

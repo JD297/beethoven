@@ -90,6 +90,7 @@ class RegisterFormType extends AbstractType
 					$this->translator->trans('frontend.page.auth.register.error.username.unique', [], 'messages'),
 				),
 			],
+			'csrf_protection' => false,
 		]);
 	}
 }
