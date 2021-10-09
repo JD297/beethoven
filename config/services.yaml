@@ -18,7 +18,7 @@ services:
         exclude:
             - '../src/Entity/'
             - '../src/Kernel.php'
-            - '../src/Tests/'
+            - '../src/Test/'
             - '../src/Migration/'
             - '../src/Framework/'
             - '../src/Event/'
