@@ -70,7 +70,7 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "Beethoven\\Tests\\": "tests/"
+            "Beethoven\\Test\\": "src/Test/"
         }
     },
     "replace": {
