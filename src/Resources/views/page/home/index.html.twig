@@ -6,7 +6,7 @@
             <thead class="text-uppercase">
             <tr>
                 <th class="border-secondary w-50 text-start">
-                    <a class="link-primary text-decoration-none" href="{{ url('frontend.forum.index.page', {'forumId': forum.id}) }}">{{ forum.name }}</a>
+                    <a class="forum-link link-primary text-decoration-none" href="{{ url('frontend.forum.index.page', {'forumId': forum.id}) }}">{{ forum.name }}</a>
                 </th>
                 <th class="border-secondary w-25">{{ 'frontend.general.statistic.header-text'|trans }}</th>
                 <th class="border-secondary w-25">{{ 'frontend.general.contribution.header-text'|trans }}</th>
