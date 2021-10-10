@@ -35,7 +35,7 @@ class UserFixtures extends Fixture
 		$userAdmin
 			->setUsername('admin')
 			->setPassword(
-				$this->passwordEncoder->encodePassword(
+				$this->passwordEncoder->hashPassword(
 					$userAdmin,
 					'admin'
 				)
