@@ -8,7 +8,7 @@ use Symfony\Component\HttpFoundation\Response;
 
 class HomeControllerTest extends WebTestCase
 {
-	public function testResponseOK(): void
+	public function testHomeResponseOK(): void
 	{
 		$client = static::createClient();
 
