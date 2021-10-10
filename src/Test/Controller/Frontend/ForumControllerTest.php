@@ -4,51 +4,36 @@ namespace Beethoven\Test\Controller\Frontend;
 
 use Beethoven\Entity\Forum;
 use Doctrine\Persistence\ManagerRegistry;
-use Symfony\Bundle\FrameworkBundle\KernelBrowser;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\RouterInterface;
 
 class ForumControllerTest extends WebTestCase
 {
+	public const FORUM_NAME = 'Beethoven Test Forum';
+
 	public function testResponseOK(): void
 	{
 		$client = static::createClient();
 		$client->catchExceptions(true);
 
-		$this->assertResponseStatusCodeSameWithForumId($client, Response::HTTP_OK, $this->getFirstForumId());
+		$forum = new Forum();
+		$forum->setName(self::FORUM_NAME);
 
-		$this->assertResponseStatusCodeSameWithForumId($client, Response::HTTP_NOT_FOUND, 0);
-	}
-
-	private function getFirstForumId(): int
-	{
 		/** @var ManagerRegistry $doctrine */
-		$doctrine = $this->getContainer()->get('doctrine');
+		$em = $this->getContainer()->get('doctrine')->getManager();
 
-		$forum = $doctrine->getRepository(Forum::class)
-			->findOneBy(['active' => true]);
-		;
+		/** @var RouterInterface $router */
+		$router = $this->getContainer()->get('router');
 
-		if (!$forum instanceof Forum) {
-			return 0;
-		}
+		$em->persist($forum);
+		$em->flush();
 
-		return $forum->getId();
-	}
+		$client->request(Request::METHOD_GET, $router->generate('frontend.forum.index.page', [
+			'forumId' => $forum->getId(),
+		]));
 
-	private function generateForumPageUri(int $id): string
-	{
-		return $this->getContainer()->get('router')->generate('frontend.forum.index.page', [
-			'forumId' => $id,
-		]);
-	}
-
-	private function assertResponseStatusCodeSameWithForumId(KernelBrowser $client, int $expectedCode, $id): void
-	{
-		$client->request(
-			Request::METHOD_GET, $this->generateForumPageUri($id)
-		);
-		$this->assertResponseStatusCodeSame($expectedCode);
+		$this->assertResponseStatusCodeSame(Response::HTTP_OK);
 	}
 }
