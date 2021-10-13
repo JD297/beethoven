@@ -2,16 +2,15 @@
 
 namespace Beethoven\Test\Controller\Frontend;
 
-use Beethoven\Entity\Forum;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\RouterInterface;
 
-class ForumControllerTest extends WebTestCase
+class PostControllerTest extends WebTestCase
 {
-	public function testForumResponseOK(): void
+	public function testTopicResponseOK(): void
 	{
 		$client = static::createClient();
 		$client->catchExceptions(true);
@@ -22,14 +21,14 @@ class ForumControllerTest extends WebTestCase
 		/** @var RouterInterface $router */
 		$router = $this->getContainer()->get('router');
 
-		$forum = new Forum();
-		$forum->setName('Beethoven Test Forum');
+		$post = new Post();
+		$post->setName('Test Post');
 
-		$em->persist($forum);
+		$em->persist($post);
 		$em->flush();
 
-		$client->request(Request::METHOD_GET, $router->generate('frontend.forum.index.page', [
-			'forumId' => $forum->getId(),
+		$client->request(Request::METHOD_GET, $router->generate('frontend.topic.index.page', [
+			'topicId' => $post->getId(),
 		]));
 
 		$this->assertResponseStatusCodeSame(Response::HTTP_OK);

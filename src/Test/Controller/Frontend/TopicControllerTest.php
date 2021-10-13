@@ -2,7 +2,6 @@
 
 namespace Beethoven\Test\Controller\Frontend;
 
-use Beethoven\Entity\Forum;
 use Beethoven\Entity\Topic;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
