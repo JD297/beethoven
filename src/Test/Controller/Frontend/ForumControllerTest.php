@@ -13,19 +13,19 @@ class ForumControllerTest extends WebTestCase
 {
 	public const FORUM_NAME = 'Beethoven Test Forum';
 
-	public function testResponseOK(): void
+	public function testForumResponseOK(): void
 	{
 		$client = static::createClient();
 		$client->catchExceptions(true);
-
-		$forum = new Forum();
-		$forum->setName(self::FORUM_NAME);
 
 		/** @var ManagerRegistry $doctrine */
 		$em = $this->getContainer()->get('doctrine')->getManager();
 
 		/** @var RouterInterface $router */
 		$router = $this->getContainer()->get('router');
+
+		$forum = new Forum();
+		$forum->setName(self::FORUM_NAME);
 
 		$em->persist($forum);
 		$em->flush();
