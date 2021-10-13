@@ -23,8 +23,8 @@ $ bin/console beethoven:setup-env
 # create databse
 $ bin/console beethoven:install
 
-# compile frontend styles
-$ bin/build-frontend.sh
+# compile theme
+$ bin/build-theme.sh themes/beethoven-default-theme
 ```
 
 ## Load DemoFixtures (optional)
