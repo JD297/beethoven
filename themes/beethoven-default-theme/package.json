@@ -1,0 +1,22 @@
+{
+  "name": "beethoven-bella-ciao-theme",
+  "version": "1.0.0",
+  "description": "The bella-ciao theme of symfony beethoven forum",
+  "main": "index.js",
+  "scripts": {
+    "sass-compile": "node node_modules/sass/sass.js src/scss/base.scss:../../src/Resources/public/css/style.css --style compressed --no-source-map"
+  },
+  "keywords": [
+    "beethoven",
+    "bootstrap",
+    "theme",
+    "bella-ciao"
+  ],
+  "author": "El Professor",
+  "license": "BSD-2-CLAUSE",
+  "dependencies": {
+    "bootstrap": "^5.0.1",
+    "sass": "^1.32.13",
+    "scss": "^0.2.4"
+  }
+}
