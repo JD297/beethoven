@@ -11,8 +11,6 @@ use Symfony\Component\Routing\RouterInterface;
 
 class ForumControllerTest extends WebTestCase
 {
-	public const FORUM_NAME = 'Beethoven Test Forum';
-
 	public function testForumResponseOK(): void
 	{
 		$client = static::createClient();
@@ -25,7 +23,7 @@ class ForumControllerTest extends WebTestCase
 		$router = $this->getContainer()->get('router');
 
 		$forum = new Forum();
-		$forum->setName(self::FORUM_NAME);
+		$forum->setName('Beethoven Test Forum');
 
 		$em->persist($forum);
 		$em->flush();
