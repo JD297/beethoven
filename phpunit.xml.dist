@@ -16,7 +16,7 @@
     </php>
 
     <testsuites>
-        <testsuite name="Project Test Suite">
+        <testsuite name="Beethoven Forum">
             <directory>src/Test</directory>
         </testsuite>
     </testsuites>
