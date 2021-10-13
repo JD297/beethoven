@@ -13,7 +13,7 @@ class ForumControllerTest extends WebTestCase
 {
 	public const FORUM_NAME = 'Beethoven Test Forum';
 
-	public function testResponseOK(): void
+	public function testForumResponseOK(): void
 	{
 		$client = static::createClient();
 		$client->catchExceptions(true);
