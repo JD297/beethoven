@@ -50,5 +50,20 @@ $ vendor/bin/php-cs-fixer fix --diff --dry-run
 $ vendor/bin/php-cs-fixer fix
 ```
 
+### PHPUnit Testing
+
+The PHPUnit Testing Framework helps you find issues in your Code. Before you create a pull request, it is required to run all tests passed. You also have to create tests for new features.
+
+```bash
+# Run all tests
+$ bin/phpunit
+
+# Run all frontend integration tests
+$ bin/phpunit src/Test/Controller/Frontend/
+
+# Run a specific test
+$ bin/phpunit src/Test/Controller/Frontend/HomeControllerTest.php
+```
+
 ## License
 Beethoven is completely free and released under the [BSD-2-Clause License](LICENSE.md).
